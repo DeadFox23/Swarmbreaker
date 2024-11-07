@@ -18,6 +18,8 @@ namespace Swarmbreaker.Cs_Files
         public void move() { }
         public void death() { }
         public void attack() { }
-        public void levelUp() { }
+        public void levelUp() {
+            
+         }
     }
 }

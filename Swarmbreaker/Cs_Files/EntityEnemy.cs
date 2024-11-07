@@ -10,10 +10,12 @@ namespace Swarmbreaker.Cs_Files
         public double statBaseAttack { get; set; }
         public double statBonusAttack { get; set; }
         public double statBonusArmor { get; set; }
+        public int xpDrop { get; }
         public Boolean isBoss;
 
         public void move() { }
         public void death() { }
         public void attack() { }
+
     }
 }
