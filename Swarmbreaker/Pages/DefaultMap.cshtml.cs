@@ -4,6 +4,6 @@ namespace Swarmbreaker.Pages
 {
     public class DefaultMap : PageModel
     {
-
+        
     }
 }
