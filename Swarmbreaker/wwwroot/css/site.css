@@ -15,8 +15,32 @@ html {
 html {
   position: relative;
   min-height: 100%;
+  
 }
 
 body {
   margin-bottom: 60px;
+}
+
+button {
+    position: ;
+    background-color: cornflowerblue;
+    color: black;
+    text-align: center;
+    font-size: 50px;
+    border-radius: 8px;
+    height:100px;
+    width:500px;
+}
+
+button:hover{
+    background-color: darkred;
+    color: white;
+}
+
+#gamemenu{
+    position: center;
+}
+#startscreen {
+    background-image: url("C:\Users\layerni\Documents\GitHub\Swarmbreaker\Swarmbreaker\wwwroot\pictures\background.jpg");
 }
