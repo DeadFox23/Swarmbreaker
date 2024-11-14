@@ -6,11 +6,13 @@
 <div id="startscreen">
     <div class="text-center">
         <h1 class="display-4">Swarmbreaker</h1>
-    </div>
-    <div id="gamemenu">
-        <a href="~\DefaultMap.cshtml"><button type="button">Play</button><br></a>
-        <a href="~\DefaultMap.cshtml"><button type="button">Options</button><br></a>
-        <a href="~\DefaultMap.cshtml"><button type="button">Credits</button><br></a>
+    
+        <div id="gamemenu">
+            <a asp-page="/Defaultmap"><button type="button">Play</button></a><br>
+            <a asp-page="/Defaultmap"><button type="button">Options</button></a><br>
+            <a asp-page="/Defaultmap"><button type="button">Credits</button></a><br>
+        </div>
+    
     </div>
 </div>
 

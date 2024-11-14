@@ -18,12 +18,7 @@ html {
   
 }
 
-body {
-  margin-bottom: 60px;
-}
-
 button {
-    position: ;
     background-color: cornflowerblue;
     color: black;
     text-align: center;
@@ -31,16 +26,25 @@ button {
     border-radius: 8px;
     height:100px;
     width:500px;
+    margin-top:10px;
 }
 
 button:hover{
-    background-color: darkred;
-    color: white;
+    background-color: skyblue;
+    color: black;
+    
 }
 
 #gamemenu{
     position: center;
+    margin-top: 20%;
 }
 #startscreen {
-    background-image: url("C:\Users\layerni\Documents\GitHub\Swarmbreaker\Swarmbreaker\wwwroot\pictures\background.jpg");
+    background-image: url("/pictures/background.jpg");
+    height: 100vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
 }
