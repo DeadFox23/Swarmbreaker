@@ -56,3 +56,36 @@ button:hover{
     padding-top: 5%;
     font-family: 'Arial Rounded MT';
 }
+
+#frame{
+    position:center
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 40px; /* Mehr Abstand innerhalb des Popups */
+    border-radius: 10px; /* Runder Rand */
+    width: 600px; /* Breite des Popups */
+    height: 700px; /* Höhe des Popups */
+    text-align: center;
+}
+
+/* Der Schließ-Button */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 50px;
+    cursor: pointer;
+}
