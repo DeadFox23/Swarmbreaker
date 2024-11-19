@@ -3,8 +3,34 @@
 @{
     ViewData["Title"] = "Home page";
 }
+<div id="startscreen">
+    <div class="text-center">
+        <h1 class="header">Swarmbreaker</h1>
+        <div id="gamemenu">
+            <a asp-page="/Defaultmap"><button type="button">Play</button></a><br>
+            <a asp-page="/Defaultmap"><button type="button">Options</button></a><br>
+            <a asp-page="/Defaultmap"><button type="button">Credits</button></a><br>
+        </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+
+
+        <button id="openPopupBtn">Popup öffnen</button>
+
+        <!-- Das Popup-Fenster -->
+        <div id="popup" class="popup">
+            <div class="popup-content">
+                @* <span id="closePopupBtn" class="close-btn">close</span> *@
+                <h2>Level up</h2>
+                <span id="closePopupBtn">
+                    <button>Close</button>
+                </span>
+                <button type="button">Close</button>
+                <button type="button">Close</button>
+            </div>
+        </div>
+
+        <script src="site.js"></script>
+    </div>
 </div>
+
