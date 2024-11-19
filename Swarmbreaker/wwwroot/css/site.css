@@ -37,8 +37,9 @@ button:hover{
 
 #gamemenu{
     position: center;
-    margin-top: 20%;
+    margin-top: 10%;
 }
+
 #startscreen {
     background-image: url("/pictures/background.jpg");
     height: 100vh;
@@ -47,4 +48,11 @@ button:hover{
     background-position: center;
     background-size: cover;
     position: relative;
+}
+
+.header{
+    font-size: 125px;
+    color: darkgreen;
+    padding-top: 5%;
+    font-family: 'Arial Rounded MT';
 }
