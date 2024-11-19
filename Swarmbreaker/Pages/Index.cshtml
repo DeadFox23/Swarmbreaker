@@ -20,14 +20,15 @@
         <!-- Das Popup-Fenster -->
         <div id="popup" class="popup">
             <div class="popup-content">
-                @* <span id="closePopupBtn" class="close-btn">close</span> *@
                 <h2>Level up</h2>
-                <button id="closePopupBtn">Close</button>
-                <button>Close</button>
-                <button>Close</button>
+                    @for (int i = 0; i<3;i++)
+                    {
+                    <button class="closePopupBtn" data-close="true">@Model.stats[Model.randomNum()]</button>
+                    Model.stats.RemoveAt(Model.index);
+                    }
             </div>
         </div>
-
+        @* <audio controls autoplay><source src="audiodatei.mp3" type="audio/mp3"></audio> *@
         <script src="site.js"></script>
     </div>
 </div>

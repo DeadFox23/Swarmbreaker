@@ -4,7 +4,8 @@
 
 // Referenzen zu den HTML-Elementen
 const openPopupBtn = document.getElementById('openPopupBtn');
-const closePopupBtn = document.getElementById('closePopupBtn');
+const popup = document.getElementById('popup');
+const closePopupBtn = document.querySelectorAll('.closePopupBtn');
 
 // Funktion, um das Popup zu öffnen
 openPopupBtn.addEventListener('click', () => {
@@ -12,8 +13,10 @@ openPopupBtn.addEventListener('click', () => {
 });
 
 // Funktion, um das Popup zu schließen
-closePopupBtn.addEventListener('click', () => {
-    popup.style.display = 'none';
+closePopupBtn.forEach(button => {
+    button.addEventListener('click', () => {
+        popup.style.display = 'none';
+    });
 });
 
 // Write your JavaScript code.
