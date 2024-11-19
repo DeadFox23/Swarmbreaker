@@ -1,2 +1,9 @@
 @page
 @model DefaultMap
+
+<img src="/pictures/betterTestPic.png" />
+
+@foreach(var item in @Model.entities)
+{
+	<p>@item</p>	
+}
