@@ -13,9 +13,9 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
-  
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
 }
 
 button {
@@ -31,8 +31,7 @@ button {
 
 button:hover{
     background-color: skyblue;
-    color: black;
-    
+    color: black;  
 }
 
 #gamemenu{

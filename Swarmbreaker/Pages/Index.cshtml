@@ -23,7 +23,7 @@
                 <h2>Level up</h2>
                     @for (int i = 0; i<3;i++)
                     {
-                    <button class="closePopupBtn" data-close="true">@Model.stats[Model.randomNum()]</button>
+                    <button class="closePopupBtn" data-close="true">@Model.stats[Model.randomIndex()]</button>
                     Model.stats.RemoveAt(Model.index);
                     }
             </div>
