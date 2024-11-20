@@ -8,7 +8,7 @@ namespace Swarmbreaker.Pages
     public class DefaultMap : PageModel
     {
         [BindProperty]
-        public List<EntityEnemy> entities { get; set; }
+        public required List<EntityEnemy> entities { get; set; }
         public int waveNumber { get; set; }
 
 
