@@ -24,4 +24,7 @@ window.addEventListener('click', (event) => {
     }
 });
 
+
+
+
 // Write your JavaScript code.
