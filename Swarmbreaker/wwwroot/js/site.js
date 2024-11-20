@@ -6,25 +6,23 @@
 
 window.addEventListener('resize', reportWindowSize);
 function reportWindowSize() {
-    console.log("baum");
     $.ajax({
         type: "GET",
-        url: '/Index?handler=Tmp',
+        url: '/Index?handler=WindowSize',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
         },
         contentType: "application/json; charset=utf-8",
-        dataType: "json"
+        dataType: "json",
+        data: JSON.stringify({ Height: window.innerHeight, Width: window.innerWidth })
     }).done(function (data) {
         console.log(data);
         console.log("hi");
     })
 }
 
-
 //index
-
 var index;
 
 function randomIndex(listnum,stats, weapons)

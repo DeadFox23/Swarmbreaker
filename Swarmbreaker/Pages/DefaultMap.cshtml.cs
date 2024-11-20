@@ -12,11 +12,20 @@ namespace Swarmbreaker.Pages
         public required List<EntityEnemy> entities { get; set; }
         public int waveNumber { get; set; }
 
+      
 
-		public void OnGet() {
+
+        public void OnGet() {
 			waveNumber = 20;
 			spawn();
             
+        }
+        public IActionResult OnGetWindowSize()
+        {
+            // Just to test that it actually gets called
+            string test = "OnPostGeoLocation CALLED ";
+
+            return new JsonResult(new { test = test, bla = "test" });
         }
         public void spawn() {
             entities = new List<EntityEnemy>();
