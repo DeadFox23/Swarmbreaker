@@ -17,11 +17,7 @@ html {
     min-height: 100%;
     overflow: hidden;
 }
-/*
-body{
-    overflow: hidden;
-}
-*/
+
 button {
     background-color: cornflowerblue;
     color: black;
