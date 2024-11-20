@@ -13,9 +13,9 @@ html {
 }
 
 html {
-  position: relative;
-  min-height: 100%;
-  
+    position: relative;
+    min-height: 100%;
+    overflow: hidden;
 }
 
 body{
@@ -35,8 +35,7 @@ button {
 
 button:hover{
     background-color: skyblue;
-    color: black;
-    
+    color: black;  
 }
 
 #gamemenu{
@@ -78,14 +77,14 @@ button:hover{
 
 .popup-content {
     background-color: white;
-    padding: 40px; /* Mehr Abstand innerhalb des Popups */
-    border-radius: 10px; /* Runder Rand */
-    width: 600px; /* Breite des Popups */
-    height: 700px; /* Höhe des Popups */
+    padding: 40px; 
+    border-radius: 10px; 
+    width: 600px; 
+    height: 700px; 
     text-align: center;
 }
 
-/* Der Schließ-Button */
+
 .close-btn {
     position: absolute;
     top: 10px;
