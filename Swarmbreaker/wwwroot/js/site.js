@@ -19,6 +19,24 @@
 //    });
 //});
 
+window.addEventListener('resize', reportWindowSize);
+function reportWindowSize() {
+    console.log("baum");
+    $.ajax({
+        type: "GET",
+        url: '/Index?handler=Tmp',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+                $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).done(function (data) {
+        console.log(data);
+        console.log("hi");
+    })
+}
+
 // Write your JavaScript code.
 
 const stats = ["HP", "Damage", "Armor"];
