@@ -43,7 +43,7 @@ const stats = ["HP", "Damage", "Armor"];
 
 const weapons = ["Slingshot", "Baum", "Knife", "Axe", "Bow"];
 
-const index;
+var index;
 
 function randomIndex(list)
 {
@@ -65,48 +65,46 @@ document.addEventListener("DOMContentLoaded", function () {
     const popup = document.getElementById('popup'); // Select the popup container
     const popupContent = document.querySelector('.popup-content'); // Select the content area
 
-openPopupBtn.addEventListener('click', () => {
-    // Clear any previous content
-    popupContent.innerHTML = "<h2>Level up</h2>"; // Start with a fresh heading
+    openPopupBtn.addEventListener('click', () => {
+        // Clear any previous content
+        popupContent.innerHTML = "<h2>Level up</h2>"; // Start with a fresh heading
 
-    // Dynamically add content (can be based on server-side data if needed)
-    for (let i = 0; i < 3; i++) {
-        const newButton = document.createElement("button");
-        newButton.classList.add("closePopupBtn");
-        newButton.setAttribute("data-close", "true");
+        // Dynamically add content (can be based on server-side data if needed)
+        for (let i = 0; i < 3; i++) {
+            const newButton = document.createElement("button");
+            newButton.classList.add("closePopupBtn");
+            newButton.setAttribute("data-close", "true");
 
-        // Here, you could use AJAX to fetch new data from the server or use random logic
-       /* newButton.textContent = weapons[randomIndex(2)]; // Placeholder text*/
-        var index;
-        if (randomBool() === 1) {
-            index = randomIndex(2);
-            newButton.textContent = weapons[index];
-            weapons.splice(index,1);
+            // Here, you could use AJAX to fetch new data from the server or use random logic
+            /* newButton.textContent = weapons[randomIndex(2)]; // Placeholder text*/
+            if (randomBool() === 1) {
+                index = randomIndex(2);
+                newButton.textContent = weapons[index];
+                weapons.splice(index, 1);
+            }
+            else {
+                index = randomIndex(1);
+                newButton.textContent = stats[index];
+                stats.splice(index, 1);
+            }
+
+
+            popupContent.appendChild(newButton);
         }
-        else {
-            index = randomIndex(1);
-            newButton.textContent = stats[randomIndindex];
-            stats.splice(index,1);
-        }
 
+        // Show the popup
+        popup.style.display = 'flex';
 
-        popupContent.appendChild(newButton);
-    }
-
-    // Show the popup
-    popup.style.display = 'flex';
-
-    // Reattach close functionality
-    const closePopupBtns = document.querySelectorAll('.closePopupBtn');
-    closePopupBtns.forEach(button => {
-        button.addEventListener('click', () => {
-            popup.style.display = 'none';
+        // Reattach close functionality
+        const closePopupBtns = document.querySelectorAll('.closePopupBtn');
+        closePopupBtns.forEach(button => {
+            button.addEventListener('click', () => {
+                popup.style.display = 'none';
+            });
         });
     });
 });
 
-<<<<<<< HEAD
-=======
 
 function loadPopupContent() {
     fetch('/Home/GetPopupData') // Replace with your action endpoint
@@ -135,4 +133,3 @@ function loadPopupContent() {
         })
         .catch(error => console.error('Error fetching popup data:', error));
 }
->>>>>>> master
