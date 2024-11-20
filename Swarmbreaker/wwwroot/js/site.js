@@ -6,25 +6,23 @@
 
 window.addEventListener('resize', reportWindowSize);
 function reportWindowSize() {
-    console.log("baum");
     $.ajax({
         type: "GET",
-        url: '/Index?handler=Tmp',
+        url: '/Index?handler=WindowSize',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
         },
         contentType: "application/json; charset=utf-8",
-        dataType: "json"
+        dataType: "json",
+        data: JSON.stringify({ Height: window.innerHeight, Width: window.innerWidth })
     }).done(function (data) {
         console.log(data);
         console.log("hi");
     })
 }
 
-
 //index
-
 var index;
 
 function randomIndex(listnum,stats, weapons)
@@ -40,8 +38,6 @@ function randomBool()
     return Math.floor(Math.random() * 2);
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const openPopupBtn = document.getElementById('openPopupBtn'); // Select the open button
     const popup = document.getElementById('popup'); // Select the popup container
@@ -54,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Dynamically add content (can be based on server-side data if needed)
         var stats = ["HP", "Damage", "Armor"];
-        var weapons = ["Slingshot", "Baum", "Knife", "Axe", "Bow"];
+        var weapons = ["Slingshot", "Treegun", "Shotgun", "Pistol", "Bow"];
 
         for (let i = 0; i < 3; i++) {
             const newButton = document.createElement("button");
@@ -88,34 +84,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
-
-
-function loadPopupContent() {
-        fetch('/Home/GetPopupData') // Replace with your action endpoint
-            .then(response => response.json())
-            .then(data => {
-                const popupContent = document.querySelector('.popup-content');
-                popupContent.innerHTML = `<h2>${data.title}</h2>`;
-
-                data.items.forEach(item => {
-                    const button = document.createElement("button");
-                    button.classList.add("closePopupBtn");
-                    button.textContent = item.name;
-                    popupContent.appendChild(button);
-                });
-
-                // Open the popup
-                popup.style.display = 'flex';
-
-                // Reattach event listeners for closing
-                const closePopupBtns = document.querySelectorAll('.closePopupBtn');
-                closePopupBtns.forEach(button => {
-                    button.addEventListener('click', () => {
-                        popup.style.display = 'none';
-                    });
-                });
-            })
-            .catch(error => console.error('Error fetching popup data:', error));
-}
-

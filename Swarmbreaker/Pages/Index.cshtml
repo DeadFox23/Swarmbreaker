@@ -20,28 +20,9 @@
         <!-- Das Popup-Fenster -->
         <div id="popup" class="popup">
             <div class="popup-content">
-                @* <h2>Level up</h2>
-
-
-
-                    @for (int i = 0; i<3;i++)
-                    {
-                    if (Model.randomBool() == 1)
-                    {
-                        <button class="closePopupBtn" data-close="true">@Model.weapons[Model.randomIndex(2)]</button>
-                        Model.weapons.RemoveAt(Model.index);
-                    }
-                    else
-                    {
-                        <button class="closePopupBtn" data-close="true">@Model.stats[Model.randomIndex(1)]</button>
-                        Model.stats.RemoveAt(Model.index);
-                    }
-                    
-                } *@
             </div>
         </div>
         @* <audio controls autoplay><source src="audiodatei.mp3" type="audio/mp3"></audio> *@
-        <script src="site.js"></script>
     </div>
 </div>
 
