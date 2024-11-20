@@ -89,6 +89,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+<<<<<<< HEAD
+=======
 
 function loadPopupContent() {
         fetch('/Home/GetPopupData') // Replace with your action endpoint
@@ -117,3 +119,4 @@ function loadPopupContent() {
             })
             .catch(error => console.error('Error fetching popup data:', error));
 }
+>>>>>>> master
