@@ -24,4 +24,25 @@ window.addEventListener('click', (event) => {
     }
 });
 
+window.onresize = reportWindowSize;
+    function reportWindowSize() {
+        heightOut.textContent = window.innerHeight;
+        widthOut.textContent = window.innerWidth;
+}
+function tmp() {
+
+    $.ajax({
+        type: "GET",
+        url: '/Index?handler=Tmp',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+                $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json"
+    }).done(function (data) {
+        console.log(data);
+    })
+}
+
 // Write your JavaScript code.

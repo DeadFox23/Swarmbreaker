@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Security.Principal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Swarmbreaker.Cs_Files;
@@ -26,6 +27,7 @@ namespace Swarmbreaker.Pages
                 entities.ElementAt(i).Id = i;
                 entities.ElementAt(i).y = random.Next(-100, 200);
 				entities.ElementAt(i).x = random.Next(-100, 200);
+                
 			}
             
         }
