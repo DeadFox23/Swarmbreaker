@@ -23,22 +23,27 @@ namespace Swarmbreaker.Pages
 			stats.Add("Armor");
 
             weapons = new List<string>();
-			weapons.Add("MP");
+			weapons.Add("Slingshot");
 			weapons.Add("Baum");
-			weapons.Add("");
+			weapons.Add("Knife");
+			weapons.Add("Axe");
+			weapons.Add("Bow");
         }
 
-		public int randomIndex()
+		public int randomIndex(int list)
 		{
             var random = new Random();
-			index = random.Next(stats.Count);
-			return index;
+			if(list == 1)
+				index = random.Next(stats.Count);
+			else
+                index = random.Next(weapons.Count);
+            return index;
 		}
         public int randomBool()
         {
             var random = new Random();
-            //weapon = random.NextInt(0,1);
-            return index;
+            weapon = random.Next(4);
+            return weapon;
         }
 
 
@@ -46,5 +51,23 @@ namespace Swarmbreaker.Pages
 		{
 
 		}
-	}
+
+
+
+
+        public IActionResult GetPopupData()
+        {
+            var popupData = new
+            {
+                title = "New Level up",
+                items = new List<object>
+        {
+            new { name = "Weapon 1" },
+            new { name = "Weapon 2" },
+            new { name = "Stat 1" }
+        }
+            };
+            return new JsonResult(popupData);
+        }
+    }
 }
