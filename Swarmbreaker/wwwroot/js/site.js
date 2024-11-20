@@ -40,8 +40,6 @@ function randomBool()
     return Math.floor(Math.random() * 2);
 }
 
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const openPopupBtn = document.getElementById('openPopupBtn'); // Select the open button
     const popup = document.getElementById('popup'); // Select the popup container
@@ -54,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // Dynamically add content (can be based on server-side data if needed)
         var stats = ["HP", "Damage", "Armor"];
-        var weapons = ["Slingshot", "Baum", "Knife", "Axe", "Bow"];
+        var weapons = ["Slingshot", "Treegun", "Shotgun", "Pistol", "Bow"];
 
         for (let i = 0; i < 3; i++) {
             const newButton = document.createElement("button");
@@ -88,32 +86,3 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 });
-
-
-function loadPopupContent() {
-        fetch('/Home/GetPopupData') // Replace with your action endpoint
-            .then(response => response.json())
-            .then(data => {
-                const popupContent = document.querySelector('.popup-content');
-                popupContent.innerHTML = `<h2>${data.title}</h2>`;
-
-                data.items.forEach(item => {
-                    const button = document.createElement("button");
-                    button.classList.add("closePopupBtn");
-                    button.textContent = item.name;
-                    popupContent.appendChild(button);
-                });
-
-                // Open the popup
-                popup.style.display = 'flex';
-
-                // Reattach event listeners for closing
-                const closePopupBtns = document.querySelectorAll('.closePopupBtn');
-                closePopupBtns.forEach(button => {
-                    button.addEventListener('click', () => {
-                        popup.style.display = 'none';
-                    });
-                });
-            })
-            .catch(error => console.error('Error fetching popup data:', error));
-}
