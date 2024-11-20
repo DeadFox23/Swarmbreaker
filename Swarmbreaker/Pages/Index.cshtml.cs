@@ -37,7 +37,7 @@ namespace Swarmbreaker.Pages
         public int randomBool()
         {
             var random = new Random();
-            weapon = random.NextInt(0,1);
+            //weapon = random.NextInt(0,1);
             return index;
         }
 
