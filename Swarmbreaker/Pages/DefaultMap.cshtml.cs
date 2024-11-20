@@ -11,31 +11,43 @@ namespace Swarmbreaker.Pages
         [BindProperty]
         public required List<EntityEnemy> entities { get; set; }
         public int waveNumber { get; set; }
-
+        int hight = 1080;
+        int width = 1920;
       
 
+        public void OnPost()
+        {
 
+        }
         public void OnGet() {
-			waveNumber = 20;
+			waveNumber = 900;
 			spawn();
             
         }
-        public IActionResult OnGetWindowSize()
+        public IActionResult OnGetWindowSize(String myData)
         {
-            // Just to test that it actually gets called
-            string test = "OnPostGeoLocation CALLED ";
-
-            return new JsonResult(new { test = test, bla = "test" });
+            String[] tmp = myData.Split(',');
+            tmp[0].Remove(0 - 7);
+            hight = Int32.Parse(tmp[0]);
+            tmp[1].Remove(0 - 6);
+            width = Int32.Parse(tmp[1]);
+            return new JsonResult(new {});
         }
+        public void Game()
+        {
+            var timer = new System.Timers.Timer();
+            timer.Interval = 1000;
+        }
+
         public void spawn() {
             entities = new List<EntityEnemy>();
             Random random = new Random();
-            int y = random.Next(1, waveNumber+2);
-            for (int i = 0; i <= y; i++) {
+            int amountEnemy = random.Next(waveNumber, waveNumber+2);
+            for (int i = 0; i <= amountEnemy; i++) {
 				entities.Add(new EntityEnemy());
                 entities.ElementAt(i).Id = i;
-                entities.ElementAt(i).y = random.Next(-100, 200);
-				entities.ElementAt(i).x = random.Next(-100, 200);
+                entities.ElementAt(i).y = random.Next(-100, hight+100);
+				entities.ElementAt(i).x = random.Next(-100, width+100);
                 
 			}
             
