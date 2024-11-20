@@ -24,13 +24,9 @@ window.addEventListener('click', (event) => {
     }
 });
 
-window.onresize = reportWindowSize;
-    function reportWindowSize() {
-        heightOut.textContent = window.innerHeight;
-        widthOut.textContent = window.innerWidth;
-}
-function tmp() {
-
+window.addEventListener('resize', reportWindowSize);
+function reportWindowSize() {
+    console.log("baum");
     $.ajax({
         type: "GET",
         url: '/Index?handler=Tmp',
@@ -42,6 +38,7 @@ function tmp() {
         dataType: "json"
     }).done(function (data) {
         console.log(data);
+        console.log("hi");
     })
 }
 
