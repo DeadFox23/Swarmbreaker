@@ -9,13 +9,23 @@ namespace Swarmbreaker.Pages
     {
         [BindProperty]
         public List<EntityEnemy> entities { get; set; }
-
+        public int waveNumber { get; set; }
 
 
 		public void OnGet() {
+			waveNumber = 20;
+			spawn();
+            
+        }
+        public void spawn() {
             entities = new List<EntityEnemy>();
-            for (int i = 0; i < 10; i++) {
+            Random random = new Random();
+            int y = random.Next(1, waveNumber+2);
+            for (int i = 0; i <= y; i++) {
 				entities.Add(new EntityEnemy());
+                entities.ElementAt(i).Id = i;
+                entities.ElementAt(i).y = random.Next(-100, 200);
+				entities.ElementAt(i).x = random.Next(-100, 200);
 			}
             
         }
