@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Security.Principal;
+using System.Timers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Swarmbreaker.Cs_Files;
@@ -11,6 +12,7 @@ namespace Swarmbreaker.Pages
         [BindProperty]
         public required List<EntityEnemy> entities { get; set; }
         public int waveNumber { get; set; }
+        public System.Timers.Timer timer;
         int hight = 1080;
         int width = 1920;
       
@@ -20,8 +22,7 @@ namespace Swarmbreaker.Pages
 
         }
         public void OnGet() {
-			waveNumber = 900;
-			spawn();
+            Main();
             
         }
         public IActionResult OnGetWindowSize(String myData)
@@ -33,12 +34,14 @@ namespace Swarmbreaker.Pages
             width = Int32.Parse(tmp[1]);
             return new JsonResult(new {});
         }
-        public void Game()
+        public void Main()
         {
-            var timer = new System.Timers.Timer();
-            timer.Interval = 1000;
-        }
+            
+            waveNumber = 900;
+            spawn();
 
+        }
+        
         public void spawn() {
             entities = new List<EntityEnemy>();
             Random random = new Random();
@@ -48,9 +51,8 @@ namespace Swarmbreaker.Pages
                 entities.ElementAt(i).Id = i;
                 entities.ElementAt(i).y = random.Next(-100, hight+100);
 				entities.ElementAt(i).x = random.Next(-100, width+100);
-                
+
 			}
-            
         }
     }
 }
