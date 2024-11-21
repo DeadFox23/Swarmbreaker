@@ -37,7 +37,7 @@ function randomBool()
 {
     return Math.floor(Math.random() * 2);
 }
-
+/*
 document.addEventListener("DOMContentLoaded", function () {
     const openPopupBtn = document.getElementById('openPopupBtn'); // Select the open button
     const popup = document.getElementById('popup'); // Select the popup container
@@ -83,4 +83,57 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     });
-});
+*/
+document.addEventListener("keydown", function (movement) {
+    let x = 0;
+    let y = 0;
+    switch (movement.key) {
+        case "w":
+            // Move character up
+            y = 1;
+            break;
+        case "a":
+            // Move character left
+            x = -1;
+            break;
+        case "s":
+            // Move character down
+            y = -1;
+            break;
+        case "d":
+            // Move character right
+            x = 1;
+            break;
+        default:
+            x = 0;
+            y = 0;
+            break;
+    }
+
+    //console.log("x: " + x)
+    //console.log("y: " + y)
+
+    let data = {
+        'this_x': x,
+        'this_y': y
+    }
+
+
+
+        $.ajax({
+            type: "GET",
+            url: '/DefaultMap?handler=Movement',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+                console.log(JSON.stringify(data));
+            },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify(data)
+        }).done(function (data) {
+            console.log(data);
+        })
+    })
+
+//});

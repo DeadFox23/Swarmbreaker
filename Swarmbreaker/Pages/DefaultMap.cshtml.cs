@@ -40,5 +40,12 @@ namespace Swarmbreaker.Pages
 			}
             
         }
+
+        [HttpPost]
+        public IActionResult OnGetMovement(String data)
+        {
+            Console.WriteLine(data);    
+            return new JsonResult(new { test = data == null });
+        }
     }
 }
