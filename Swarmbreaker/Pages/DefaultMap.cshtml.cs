@@ -10,6 +10,7 @@ namespace Swarmbreaker.Pages
     {
         [BindProperty]
         public required List<EntityEnemy> entities { get; set; }
+        public required List<EntityPlayerCharacter> players { get; set; }
         public int waveNumber { get; set; }
 
       
