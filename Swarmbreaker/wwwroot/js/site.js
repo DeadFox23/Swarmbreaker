@@ -24,6 +24,7 @@ function reportWindowSize() {
 
 //index
 var index;
+var upgrades;
 
 function randomIndex(listnum,stats, weapons)
 {
@@ -38,6 +39,13 @@ function randomBool()
     return Math.floor(Math.random() * 2);
 }
 
+function addHP() { statBaseHP + 1; }
+function addDamage() { statBonusAttack + 1; }
+function addArmor() { statBonusArmor + 1; }
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const openPopupBtn = document.getElementById('openPopupBtn'); // Select the open button
     const popup = document.getElementById('popup'); // Select the popup container
@@ -45,12 +53,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     openPopupBtn.addEventListener('click', () => {
-        // Clear any previous content
-        popupContent.innerHTML = "<h2>Level up</h2>"; // Start with a fresh heading
 
-        // Dynamically add content (can be based on server-side data if needed)
+        popupContent.innerHTML = "<h2>Level up</h2>"; 
+
         var stats = ["HP", "Damage", "Armor"];
-        var weapons = ["Slingshot", "Treegun", "Shotgun", "Pistol", "Bow"];
+        var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Bow", "Axe"];
+        var buttons;
+        upgrades = [];
 
         for (let i = 0; i < 3; i++) {
             const newButton = document.createElement("button");
@@ -60,16 +69,48 @@ document.addEventListener("DOMContentLoaded", function () {
             if (randomBool() === 1) {
                 index = randomIndex(2, stats, weapons);
                 newButton.textContent = weapons[index];
+                switch (newButtontextContent) {
+                    case "Slingshot":
+                        upgrades.push(addSlingshot());
+                        break;
+                    case "Tree":
+                        upgrades.push(addTree());
+                        break;
+                    case "Shotgun":
+                        upgrades.push(addShotgun());
+                        break;
+                    case "Knife":
+                        upgrades.push(addKnife());
+                        break;
+                    case "Bow":
+                        upgrades.push(addBow());
+                        break;
+                    case "Axe":
+                        upgrades.push(addAxe());
+                        break;
+                }
                 weapons.splice(index, 1);
             }
             else {
                 index = randomIndex(1, stats, weapons);
                 newButton.textContent = stats[index];
+                switch (newButtontextContent) {
+                    case "HP":
+                        upgrades.push(addHP());
+                        break;
+                    case "Damage":
+                        upgrades.push(addDamage());
+                        break;
+                    case "Armor":
+                        upgrades.push(addArmor());
+                        break;
+                }
                 stats.splice(index, 1);
             }
 
 
             popupContent.appendChild(newButton);
+            buttons.push(newButton);
         }
 
         // Show the popup
@@ -82,5 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 popup.style.display = 'none';
             });
         });
+
+        //add stats/weapons with function
     });
 });

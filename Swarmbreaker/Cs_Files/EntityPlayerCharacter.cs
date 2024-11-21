@@ -1,3 +1,5 @@
+using System.Collections;
+
 namespace Swarmbreaker.Cs_Files
 {
     public class EntityPlayerCharacter : IEntity
@@ -19,7 +21,13 @@ namespace Swarmbreaker.Cs_Files
         public void death() { }
         public void attack() { }
         public void levelUp() {
-            
+            int xpRequirement = (statLevel + 3) * (statLevel + 3);
+            if (statXP == xpRequirement)
+            {
+                statLevel++;
+                //open popup to select upgrade
+                statXP = 0;
+            }
         }
     }
 }
