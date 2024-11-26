@@ -8,7 +8,7 @@ window.addEventListener('resize', reportWindowSize);
 function reportWindowSize() {
     $.ajax({
         type: "GET",
-        url: '/Index?handler=WindowSize',
+        url: '/DefaultMap?handler=data',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
@@ -140,18 +140,20 @@ updateTimer();
 function enemyPositionAndTimer() {
     $.ajax({
         type: "GET",
-        url: '/Index?handler=enemyPositionAndTimer',
+        url: '/DefaultMap?handler=Data',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: JSON.stringify({ Timer: currentInterval })
-    }).done(function (data) {
-            const { positions, nextInterval } = data;
-            updateEnemyPosition(positions);
-            updateTimer(nextInterval);
+        data: JSON.stringify({ Timer: currentInterval }),
+        success:
+            function (data) {
+                const { positions, nextInterval } = data;
+                updateEnemyPosition(positions);
+                updateTimer(nextInterval);
+            }
     })
 }
 function updateEnemyPosition(positions) {
