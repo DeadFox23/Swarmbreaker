@@ -131,3 +131,40 @@ document.addEventListener("DOMContentLoaded", function () {
         //Ajax here
      }
 });
+
+let timerID = null;
+let currentInterval = 2000;
+
+updateTimer();
+
+function enemyPositionAndTimer() {
+    $.ajax({
+        type: "GET",
+        url: '/Index?handler=enemyPositionAndTimer',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+                $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        data: JSON.stringify({ Timer: currentInterval })
+    }).done(function (data) {
+            const { positions, nextInterval } = data;
+            updateEnemyPosition(positions);
+            updateTimer(nextInterval);
+    })
+}
+function updateEnemyPosition(positions) {
+    positions.forEach(({ id, top, left }) => {
+        const img = document.getElementById(id);
+        if (img) {
+            img.style.top = `${top} px`;
+            img.style.left = `${left}px`;
+        }
+    });
+}
+function updateTimer(newInterval) {
+    if (timerID) clearInterval(timerID);
+    //currentInterval = newInterval;
+    timerID = setInterval(enemyPositionAndTimer, currentInterval);
+}
