@@ -39,14 +39,10 @@ function randomBool()
     return Math.floor(Math.random() * 2);
 }
 
-function addHP() { statBaseHP + 1; }
-function addDamage() { statBonusAttack + 1; }
-function addArmor() { statBonusArmor + 1; }
 
-
-
-
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", generatePopUp);
+function generatePopUp()
+{
     const openPopupBtn = document.getElementById('openPopupBtn'); // Select the open button
     const popup = document.getElementById('popup'); // Select the popup container
     const popupContent = document.querySelector('.popup-content'); // Select the content area
@@ -56,7 +52,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         popupContent.innerHTML = "<h2>Level up</h2>"; 
 
-        var stats = ["HP", "Damage", "Armor"];
+        var stats = ["Speed", "HP", "Damage", "Armor", "Attackspeed"];
         var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Bow", "Axe"];
 
         for (let i = 0; i < 3; i++) {
@@ -78,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 stats.splice(index, 1);
             }
 
-            newButton.onclick = function () { btnClick_Click(newButton.id) };
+            newButton.onclick = function () {btnClick_Click(newButton.id)};
             popupContent.appendChild(newButton);
         }
 
@@ -92,45 +88,71 @@ document.addEventListener("DOMContentLoaded", function () {
                 popup.style.display = 'none';
             });
         });
-    });
+    });   
+}
+
+function btnClick_Click(ButtonID) {
+    let action = "";
+    switch (ButtonID) {
+        case "Speed":
+            action = "increaseSpeed()";
+            break;
+        case "HP":
+            action = "increaseHP()";
+            break;
+        case "Damage":
+            action = "increaseAttack()";
+            break;
+        case "Armor":
+            action = "increaseArmor()";
+            break;
+        case "Attackspeed":
+            action = "increaseAttackSpeed()";
+            break;
+
+        case "Slingshot":
+            action = "addWeapon(\"Slingshot\", \"Slingshot\", 1.3, 15, 3, 100, 1)";
+            break;
+        case "Tree":
+            action = "addWeapon(\"Tree\", \"Tree\", 1.5, 20, 1, 40, 0)";
+            break;
+        case "Shotgun":
+            action = "addWeapon(\"Shotgun\", \"Shotgun\", 1.2, 5, 3, 75, 3)";
+            break;
+        case "Knife":
+            action = "addWeapon(\"Knife\", \"Knife\", 0.7, 9, 2, 25, 0)";
+            break;
+        case "Bow":
+            action = "addWeapon(\"Bow\", \"Bow\", 1, 11, 3, 150, 1)";
+            break;
+        case "Axe":
+            action = "addWeapon(\"Axe\", \"Axe\", 0.9, 10, 1, 30, 0)";
+            break;
+    }
+    console.log(action);
+
+    //Ajax here
+
+    window.addEventListener('', changePlayerStats);
+    function changePlayerStats() {
+        $.ajax({
+            type: "GET",
+            url: '/Index?handler=WindowSize',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            data: JSON.stringify({action})
+        }).done(function (data) {
+            console.log(data);
+            console.log("hi");
+        })
+    }
+}
 
 
-    function btnClick_Click(ButtonID)
-    {
-        let action = "";
-        switch(id) {
-            case "Slingshot":
-                action = "addWeapon";
-            break;
-            case "Tree":
-
-            break;
-            case "Shotgun":
-
-            break;
-            case "Knife":
-
-            break;
-            case "Bow":
-
-            break;
-            case "Axe":
-
-            break;
-            case "HP":
-                Console.WriteLine("HP");
-            break;
-            case "Damage":
-                Console.WriteLine("Damage");
-            break;
-            case "Armor":
-                Console.WriteLine("Armor");
-            break;
-        }
-        console.log(action);
-        //Ajax here
-     }
-});
 
 let timerID = null;
 let currentInterval = 2000;

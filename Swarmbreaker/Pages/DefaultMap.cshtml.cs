@@ -48,7 +48,6 @@ namespace Swarmbreaker.Pages
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
             for (int i = 0; i <= amountEnemy; i++) {
 				entities.Add(new EntityEnemy());
-                entities.ElementAt(i).Id = i;
                 entities.ElementAt(i).y = random.Next(-100, height+100);
 				entities.ElementAt(i).x = random.Next(-100, width+100);
 

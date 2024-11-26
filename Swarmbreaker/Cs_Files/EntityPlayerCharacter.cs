@@ -52,5 +52,25 @@ namespace Swarmbreaker.Cs_Files
             this.statBonusArmor = statBonusArmor;
             this.statAttackSpeed = statAttackSpeed;
         }
+        public void increaseSpeed()
+        {
+            speed++;
+        }
+        public void increaseHP()
+        {
+            statBaseHP++;
+        }
+        public void increaseAttack()
+        {
+            statBonusAttack++;
+        }
+        public void increaseArmor()
+        {
+            statBonusArmor++;
+        }
+        public void increaseAttackSpeed()
+        {
+            statAttackSpeed++;
+        }
     }
 }
