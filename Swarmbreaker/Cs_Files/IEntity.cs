@@ -1,3 +1,5 @@
+using System.Numerics;
+
 namespace Swarmbreaker.Cs_Files
 {
     public interface IEntity
@@ -5,14 +7,12 @@ namespace Swarmbreaker.Cs_Files
         int Id { get; set; }
         int y { get; set; }
         int x { get; set; }
-        double statBaseHP { get; set; }
-        double statBaseAttack { get; set; }
-        double statBonusAttack { get; set; }
-        double statBonusArmor { get; set; }
+        float statBaseHP { get; set; }
+        float statBaseAttack { get; set; }
+        float statBonusAttack { get; set; }
+        float statBonusArmor { get; set; }
 
-        public void move();
         public void death();
-        public void attack();
 
     }
 }
