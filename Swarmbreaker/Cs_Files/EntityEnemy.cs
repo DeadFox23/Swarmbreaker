@@ -1,19 +1,19 @@
 using System.Numerics;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Swarmbreaker.Cs_Files
 {
     public class EntityEnemy : IEntity
     {
 
-        public int Id { get; set; }
-        public int y { get; set; }
-        public int x { get; set; }
-        public float speed { get; set; }
-        public float statBaseHP { get; set; }
-        public float statBaseAttack { get; set; }
-        public float statBonusAttack { get; set; }
-        public float statBonusArmor { get; set; }
-        public int xpDrop { get; }
+        public int y { get; set; } = 0;
+        public int x { get; set; } = 0;
+        public float speed { get; set; } = 0;
+        public float statBaseHP { get; set; } = 0;
+        public float statBaseAttack { get; set; } = 0;
+        public float statBonusAttack { get; set; } = 0;
+        public float statBonusArmor { get; set; } = 0;
+        public int xpDrop { get; } = 0;
         public Boolean isBoss { get; } = false;
 
         public void move(List<EntityPlayerCharacter> players) {
@@ -21,7 +21,7 @@ namespace Swarmbreaker.Cs_Files
                 return; // No players to move toward
 
             // Find the closest player
-            EntityPlayerCharacter closestPlayer = null;
+            EntityPlayerCharacter? closestPlayer = null;
             float closestDistance = float.MaxValue;
             Vector2 currentPosition = new Vector2(x, y);
 
@@ -55,6 +55,7 @@ namespace Swarmbreaker.Cs_Files
             direction *= speed;
             this.x += (int)direction.X;
             this.y += (int)direction.Y;
+            this.attack(closestPlayer);
         }
         public void death() { }
         public void attack(EntityPlayerCharacter target) {
@@ -62,8 +63,9 @@ namespace Swarmbreaker.Cs_Files
             if (target.x >= this.x-10 && target.x<=this.x+10 && target.y >= this.y - 10 && target.y <= this.y + 10)
             {
                 //damage multiplied by attack modifier
-                int damage = (int) Math.Ceiling(target.statBonusArmor - (this.statBaseAttack * this.statBonusAttack));
-                target.statBaseHP = target.statBaseHP - (damage >= 0 ? damage : 0);
+                int damage = (int) Math.Ceiling((this.statBaseAttack * this.statBonusAttack) - target.statBonusArmor);
+                target.statBaseHP = target.statBaseHP - (damage > 0 ? damage : 0);
+
 
             }
             return;
