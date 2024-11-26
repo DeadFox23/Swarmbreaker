@@ -11,7 +11,6 @@ namespace Swarmbreaker.Cs_Files
         float statBonusAttack { get; set; }
         float statBonusArmor { get; set; }
 
-        public void death();
 
     }
 }
