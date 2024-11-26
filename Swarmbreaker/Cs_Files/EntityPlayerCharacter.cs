@@ -15,7 +15,6 @@ namespace Swarmbreaker.Cs_Files
         public float statBonusAttack { get; set; } = 0;
         public float statBonusArmor { get; set; } = 0;
         public float statAttackSpeed { get; set; } = 0;
-        public float statBaseAttack { get; set; } = 0;
 
         public int statXP=0;
         public int statLevel=1;
@@ -39,7 +38,7 @@ namespace Swarmbreaker.Cs_Files
         public void levelDown() {
             throw new NotImplementedException();
         }
-        public EntityPlayerCharacter(int y, int x, float speed, float statBaseHP,float statBaseAttack, Weapon equippedWeapon, float statBonusAttack, float statBonusArmor, float statAttackSpeed)
+        public EntityPlayerCharacter(int y, int x, float speed, float statBaseHP, Weapon equippedWeapon, float statBonusAttack, float statBonusArmor, float statAttackSpeed)
         {
             this.y = y;
             this.x = x;
@@ -47,7 +46,6 @@ namespace Swarmbreaker.Cs_Files
             this.statBaseHP = statBaseHP;
             this.equippedWeapons = new Weapon[6];
             this.equippedWeapons[0] = (equippedWeapon ?? new Weapon("placeholder", "placeholder", (float)0.0, (float)0.0, 0, 0, 0));
-            this.statBaseAttack = statBaseAttack;
             this.statBonusAttack = statBonusAttack;
             this.statBonusArmor = statBonusArmor;
             this.statAttackSpeed = statAttackSpeed;
@@ -59,6 +57,10 @@ namespace Swarmbreaker.Cs_Files
                     equippedWeapons[i] = equippedWeapons[i] != null ? equippedWeapons[i] : new Weapon(name, description, attackSpeed, attackBase, weaponType, weaponRange, projectiles);
                 }
             }
+        }
+
+        public void increaseSpeed(){
+            this.speed++;
         }
     }
 }
