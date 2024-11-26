@@ -35,8 +35,8 @@ namespace Swarmbreaker.Pages
             return new JsonResult(new {});
         }
         public void Main()
-        {
-            
+        {// FIX THE WEAPON LATER - CREATE LIST OF POSSIBLE WEAPONS
+            players.Add(new EntityPlayerCharacter(height / 2, width / 2, 1, 100, 5, new Weapon("placeholder", "placeholder", 0, 0, 0, 0, 0), 0, 0, 0));
             waveNumber = 900;
             spawn();
 

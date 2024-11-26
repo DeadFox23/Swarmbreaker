@@ -32,7 +32,7 @@ namespace Swarmbreaker.Cs_Files
         }
         public void xpUp(int xp) {
             this.statXP += xp;
-            if(this.statXP > this.statLevel * 100) {
+            if(this.statXP > this.statLevel /0.5 * 3) {
             
             }
         }
@@ -51,6 +51,14 @@ namespace Swarmbreaker.Cs_Files
             this.statBonusAttack = statBonusAttack;
             this.statBonusArmor = statBonusArmor;
             this.statAttackSpeed = statAttackSpeed;
+        }
+
+        public void addWeapon(string name, string description, float attackSpeed, float attackBase, int weaponType, int weaponRange, int projectiles){
+            if (this.equippedWeapons[5] != null) {
+                for (int i = 1; i < equippedWeapons.Length-1; i++) {
+                    equippedWeapons[i] = equippedWeapons[i] != null ? equippedWeapons[i] : new Weapon(name, description, attackSpeed, attackBase, weaponType, weaponRange, projectiles);
+                }
+            }
         }
     }
 }
