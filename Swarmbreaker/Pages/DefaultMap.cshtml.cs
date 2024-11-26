@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Security.Principal;
+using System.Text.RegularExpressions;
 using System.Timers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,8 +13,8 @@ namespace Swarmbreaker.Pages
         [BindProperty]
         public required List<EntityEnemy> entities { get; set; }
         public int waveNumber { get; set; }
-        public System.Timers.Timer timer;
-        int hight = 1080;
+        public System.Timers.Timer? timer;
+        int height = 1080;
         int width = 1920;
       
 
@@ -25,13 +26,11 @@ namespace Swarmbreaker.Pages
             Main();
             
         }
+
         public IActionResult OnGetWindowSize(String myData)
         {
-            String[] tmp = myData.Split(',');
-            tmp[0].Remove(0 - 7);
-            hight = Int32.Parse(tmp[0]);
-            tmp[1].Remove(0 - 6);
-            width = Int32.Parse(tmp[1]);
+            height = Int32.Parse(Regex.Match(myData, "(?<=\\bHeight\\b\\W:\\s)[0-9]+(?=,)").ToString());
+            width = Int32.Parse(Regex.Match(myData, "(?<=\\bWidth\\b\\W:\\s)[0-9]+(?=,)").ToString());
             return new JsonResult(new {});
         }
         public void Main()
@@ -49,7 +48,7 @@ namespace Swarmbreaker.Pages
             for (int i = 0; i <= amountEnemy; i++) {
 				entities.Add(new EntityEnemy());
                 entities.ElementAt(i).Id = i;
-                entities.ElementAt(i).y = random.Next(-100, hight+100);
+                entities.ElementAt(i).y = random.Next(-100, height+100);
 				entities.ElementAt(i).x = random.Next(-100, width+100);
 
 			}
