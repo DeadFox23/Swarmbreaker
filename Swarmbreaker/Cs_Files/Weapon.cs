@@ -22,5 +22,6 @@
             this.weaponRange = weaponRange;
             this.projectiles = projectiles;
         }
+
     }
 }
