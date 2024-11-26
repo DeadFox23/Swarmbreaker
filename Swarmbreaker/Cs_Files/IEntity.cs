@@ -4,7 +4,6 @@ namespace Swarmbreaker.Cs_Files
 {
     public interface IEntity
     {
-        int Id { get; set; }
         int y { get; set; }
         int x { get; set; }
         float statBaseHP { get; set; }

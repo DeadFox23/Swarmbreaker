@@ -24,6 +24,7 @@ function reportWindowSize() {
 
 //index
 var index;
+var upgrades;
 
 function randomIndex(listnum,stats, weapons)
 {
@@ -38,6 +39,13 @@ function randomBool()
     return Math.floor(Math.random() * 2);
 }
 
+function addHP() { statBaseHP + 1; }
+function addDamage() { statBonusAttack + 1; }
+function addArmor() { statBonusArmor + 1; }
+
+
+
+
 document.addEventListener("DOMContentLoaded", function () {
     const openPopupBtn = document.getElementById('openPopupBtn'); // Select the open button
     const popup = document.getElementById('popup'); // Select the popup container
@@ -45,30 +53,32 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     openPopupBtn.addEventListener('click', () => {
-        // Clear any previous content
-        popupContent.innerHTML = "<h2>Level up</h2>"; // Start with a fresh heading
 
-        // Dynamically add content (can be based on server-side data if needed)
+        popupContent.innerHTML = "<h2>Level up</h2>"; 
+
         var stats = ["HP", "Damage", "Armor"];
-        var weapons = ["Slingshot", "Treegun", "Shotgun", "Pistol", "Bow"];
+        var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Bow", "Axe"];
 
         for (let i = 0; i < 3; i++) {
             const newButton = document.createElement("button");
             newButton.classList.add("closePopupBtn");
             newButton.setAttribute("data-close", "true");
+            
 
-            if (randomBool() === 1) {
+            if (randomBool() == 1) {
                 index = randomIndex(2, stats, weapons);
                 newButton.textContent = weapons[index];
+                newButton.id = weapons[index];
                 weapons.splice(index, 1);
             }
             else {
                 index = randomIndex(1, stats, weapons);
                 newButton.textContent = stats[index];
+                newButton.id = stats[index];
                 stats.splice(index, 1);
             }
 
-
+            newButton.onclick = function () { btnClick_Click(newButton.id) };
             popupContent.appendChild(newButton);
         }
 
@@ -83,6 +93,43 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     });
+
+
+    function btnClick_Click(ButtonID)
+    {
+        let action = "";
+        switch(id) {
+            case "Slingshot":
+                action = "addWeapon";
+            break;
+            case "Tree":
+
+            break;
+            case "Shotgun":
+
+            break;
+            case "Knife":
+
+            break;
+            case "Bow":
+
+            break;
+            case "Axe":
+
+            break;
+            case "HP":
+                Console.WriteLine("HP");
+            break;
+            case "Damage":
+                Console.WriteLine("Damage");
+            break;
+            case "Armor":
+                Console.WriteLine("Armor");
+            break;
+        }
+        console.log(action);
+        //Ajax here
+     }
 });
 
 let timerID = null;
