@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 
@@ -26,6 +27,7 @@ namespace Swarmbreaker.Cs_Files
             this.attack(ms);
         }
         public void death() { }
+
         public void attack(int ms) {
             foreach(Weapon weapon in equippedWeapons) { weapon.attack(ms); }
         }
