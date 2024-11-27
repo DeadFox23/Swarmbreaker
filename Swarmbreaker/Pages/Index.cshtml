@@ -13,7 +13,6 @@
         </div>
 
         
-
         <!-- The Modal -->
         <div id="creditsModal" class="modal">
             <!-- Modal Content -->
@@ -33,20 +32,23 @@
 
         <div id="openSettings" class="popup">
             <div id="settings-content">
-                <input type="checkbox" id="fullscreen">
-                <label> fullscreen</label><br>
+                Press F11 for Fullscreen<br /><br />
+                @* <input type="checkbox" id="fullscreenCheckbox">
+                <label for="fullscreenCheckbox"> fullscreen</label><br> *@
+                Volume
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
                 <button class="btn-close" onclick="closeSettings()"></button>
             </div>
         </div>
 
-        <button id="openLevelUp">Popup öffnen</button>
 
+        <button id="openLevelUp">Popup öffnen</button>
         <!-- Das Popup-Fenster -->
         <div id="levelUp" class="popup">
             <div class="levelUp-content">
             </div>
         </div>
-        @* <audio controls autoplay><source src="audiodatei.mp3" type="audio/mp3"></audio> *@
+        @* <audio id="backgroundMusic" src="music.mp3" loop></audio> *@
     </div>
 </div>
 

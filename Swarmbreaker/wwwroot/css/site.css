@@ -18,6 +18,33 @@ html {
     overflow: hidden;
 }
 
+.header {
+    font-size: 125px;
+    color: darkgreen;
+    padding-top: 5%;
+    font-family: 'Arial Rounded MT';
+}
+
+#gamemenu {
+    position: center;
+    margin-top: 10%;
+}
+
+#startscreen {
+    background-image: url("/pictures/background.jpg");
+    height: 100vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    position: relative;
+}
+
+/*#frame {
+    position: center
+}*/
+
+
 button {
     background-color: cornflowerblue;
     color: black;
@@ -34,32 +61,6 @@ button:hover{
     color: black;  
 }
 
-#gamemenu{
-    position: center;
-    margin-top: 10%;
-}
-
-#startscreen {
-    background-image: url("/pictures/background.jpg");
-    height: 100vh;
-    width: 100%;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    position: relative;
-}
-
-.header{
-    font-size: 125px;
-    color: darkgreen;
-    padding-top: 5%;
-    font-family: 'Arial Rounded MT';
-}
-
-#frame{
-    position:center
-}
-
 .popup {
     display: none;
     position: fixed;
@@ -72,15 +73,17 @@ button:hover{
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-.levelUp-content {
-    background-color: white;
-    padding: 40px;
-    border-radius: 10px;
-    width: 600px;
-    height: 700px;
-    text-align: center;
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.95);
 }
-
 
 .btn-close {
     color: white;
@@ -91,16 +94,18 @@ button:hover{
     cursor: pointer;
 }
 
-/* The Modal (background) */
-.modal {
-    display: none;
-    position: fixed;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.95);
+/*LevelUp*/
+.levelUp-content {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    width: 600px;
+    height: 700px;
+    text-align: center;
 }
 
-/* Modal Content */
+
+/*Credits*/
 .credits-content {
     background-image: url("/pictures/background_credits.jpg");
     background-repeat: no-repeat;
@@ -130,11 +135,13 @@ button:hover{
         /*margin-bottom: 10px;*/
     }
 
+/*Settings*/
 #settings-content {
     background-color: white;
-    padding: 40px;
+    /*padding: 40px;*/
     border-radius: 10px;
-    width: 600px;
-    height: 700px;
-    text-align: center;
+    width: 400px;
+    height: 500px;
+    text-align: left;
+    font-size:20px;
 }
