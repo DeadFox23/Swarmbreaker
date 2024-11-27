@@ -8,18 +8,42 @@
         <h1 class="header">Swarmbreaker</h1>
         <div id="gamemenu">
             <button type="button" onclick="location.href='@Url.Page("/Defaultmap")'">Play</button><br />
-            <button type="button" onclick="location.href='@Url.Page("/Defaultmap")'">Options</button><br />
-            <button type="button" onclick="location.href='@Url.Page("/Defaultmap")'">Credits</button><br />
+            <button type="button" onclick="openSettings()">Options</button><br />
+            <button class="btn-open" onclick="openCredits()">Credits</button><br />
         </div>
 
+        
 
+        <!-- The Modal -->
+        <div id="creditsModal" class="modal">
+            <!-- Modal Content -->
+            <div class="credits-content">
+                <h2>Project Swarmbreaker<br />Credits</h2>
+                <br />
+                <h3>Programmers</h3>
+                <ul>
+                    <li>Nico</li>
+                    <li>Marco</li>
+                    <li>Simon</li>
+                    <li>Nina</li>
+                </ul>
+                <button class="btn-close" onclick="closeCredits()"></button>
+            </div>
+        </div>
 
+        <div id="openSettings" class="popup">
+            <div id="settings-content">
+                <input type="checkbox" id="fullscreen">
+                <label> fullscreen</label><br>
+                <button class="btn-close" onclick="closeSettings()"></button>
+            </div>
+        </div>
 
-        <button id="openPopupBtn">Popup öffnen</button>
+        <button id="openLevelUp">Popup öffnen</button>
 
         <!-- Das Popup-Fenster -->
-        <div id="popup" class="popup">
-            <div class="popup-content">
+        <div id="levelUp" class="popup">
+            <div class="levelUp-content">
             </div>
         </div>
         @* <audio controls autoplay><source src="audiodatei.mp3" type="audio/mp3"></audio> *@

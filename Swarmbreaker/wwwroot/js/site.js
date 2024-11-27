@@ -39,13 +39,13 @@ function randomBool()
     return Math.floor(Math.random() * 2);
 }
 
-
+//popupLevelUp
 document.addEventListener("DOMContentLoaded", generatePopUp);
 function generatePopUp()
 {
-    const openPopupBtn = document.getElementById('openPopupBtn'); // Select the open button
-    const popup = document.getElementById('popup'); // Select the popup container
-    const popupContent = document.querySelector('.popup-content'); // Select the content area
+    const openPopupBtn = document.getElementById('openLevelUp'); // Select the open button
+    const popup = document.getElementById('levelUp'); // Select the popup container
+    const popupContent = document.querySelector('.levelUp-content'); // Select the content area
 
 
     openPopupBtn.addEventListener('click', () => {
@@ -152,7 +152,32 @@ function btnClick_Click(ButtonID) {
     }
 }
 
+function openSettings() {
+    document.getElementById('openSettings').style.display = "flex";
+}
 
+// Function to close the modal
+function closeSettings() {
+    document.getElementById('openSettings').style.display = "none";
+}
+
+
+
+//Credits
+// Function to open the modal
+function openCredits() {
+    document.getElementById('creditsModal').style.display = "flex";
+}
+
+// Function to close the modal
+function closeCredits() {
+    document.getElementById('creditsModal').style.display = "none";
+}
+
+
+
+
+//Enemystuff
 
 let timerID = null;
 let currentInterval = 2000;
