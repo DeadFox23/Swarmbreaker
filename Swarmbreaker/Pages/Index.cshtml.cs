@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Reflection;
 using System;
+using System.Text.RegularExpressions;
 
 namespace Swarmbreaker.Pages
 {
@@ -19,6 +20,11 @@ namespace Swarmbreaker.Pages
 
 		}
 
-		
+		public JsonResult OnGetPlayerStats(String data)
+        {
+            Console.WriteLine(data);
+
+            return new JsonResult(new { test="test" });
+        }
     }
 }

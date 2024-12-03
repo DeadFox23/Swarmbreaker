@@ -130,24 +130,25 @@ function btnClick_Click(ButtonID) {
             break;
     }
     changePlayerStats(action);
-    console.log(action);
+    //console.log(action);
 
     //Ajax here
 
     function changePlayerStats(action) {
         $.ajax({
             type: "GET",
-            url: '/Index?handler=WindowSize',
+            url: '/Index?handler=PlayerStats',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("XSRF-TOKEN",
                     $('input:hidden[name="__RequestVerificationToken"]').val());
+                console.log(JSON.stringify({ action }));
             },
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             data: JSON.stringify({ action }),
             success:
                 function (data) {
-
+                    console.log(data)
                 }
         })
     }
