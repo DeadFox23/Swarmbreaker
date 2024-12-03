@@ -56,7 +56,7 @@ namespace Swarmbreaker.Cs_Files
             return (this.statBaseHP <= 0);
         }
         public EntityEnemy attack(EntityEnemy closestEnemy) {
-            foreach(Weapon weapon in equippedWeapons) { closestEnemy = weapon.attack(closestEnemy); }
+            foreach(Weapon weapon in equippedWeapons) { closestEnemy = weapon.attack(closestEnemy,this.x, this.y); }
             return (closestEnemy);
         }
         public void xpUp(int xp)

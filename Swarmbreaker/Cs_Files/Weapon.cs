@@ -14,18 +14,33 @@
         public DateTime lastAttack { get; set; } = DateTime.Now;
         public List<Projectile> Projectiles { get; set; } = [];
 
-        public EntityEnemy attack(EntityEnemy closestEnemy) {
+
+
+        public EntityEnemy attack(EntityEnemy closestEnemy, int x, int y) {
+
             TimeSpan elapsedTime = DateTime.Now - lastAttack;
 
-            if (elapsedTime.TotalMilliseconds >= attackSpeed)
-            {
+            if (elapsedTime.TotalMilliseconds >= attackSpeed){
+
+
+                //detect closest enemy
+
+
+
                 if (attackType > 0)
                 {
                     for (int i = 0; i < projectiles; i++)
                     {
-                        Projectiles.Add(new((int)WeaponData.data[weaponType, 0], (int)WeaponData.data[weaponType, 1], (int)WeaponData.data[weaponType, 0]));
+                        Projectiles.Add(new((int)WeaponData.data[weaponType, 0], (int)WeaponData.data[weaponType, 1], (int)WeaponData.data[weaponType, 0], x, y));
                     }
                 }
+                
+
+
+                //general weapon behaviour
+
+
+
                 lastAttack = DateTime.Now;
             }
 
@@ -33,11 +48,27 @@
 
         }
 
-        public void Upgrade(){
 
 
 
+        public void Upgrade(int upgradeType){
+            switch(upgradeType){
 
+                case 0:
+                    attackSpeed *=  (float)1.1;
+                    break;
+
+                case 1:
+                    attackBase  *=  (float)1.05;
+                    break;
+                
+                case 2:
+                    projectiles++;
+                    break;
+
+                default:
+                    break;
+            }
         }
 
 
