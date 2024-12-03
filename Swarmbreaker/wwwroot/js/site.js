@@ -51,7 +51,7 @@ function generatePopUp()
     openPopupBtn.addEventListener('click', () => {
 
         popupContent.innerHTML = "<h2>Level up</h2>"; 
-
+        //Weapons and stats
         var stats = ["Speed", "HP", "Damage", "Armor", "Attackspeed"];
         var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Bow", "Axe"];
 
@@ -91,87 +91,86 @@ function generatePopUp()
     });   
 }
 
-function btnClick_Click(ButtonID) {
-    let action = "";
-    switch (ButtonID) {
-        case "Speed":
-            action = "increaseSpeed()";
-            break;
-        case "HP":
-            action = "increaseHP()";
-            break;
-        case "Damage":
-            action = "increaseAttack()";
-            break;
-        case "Armor":
-            action = "increaseArmor()";
-            break;
-        case "Attackspeed":
-            action = "increaseAttackSpeed()";
-            break;
 
-        case "Slingshot":
-            action = "addWeapon(\"Slingshot\", \"Slingshot\", 1.3, 15, 3, 100, 1)";
-            break;
-        case "Tree":
-            action = "addWeapon(\"Tree\", \"Tree\", 1.5, 20, 1, 40, 0)";
-            break;
-        case "Shotgun":
-            action = "addWeapon(\"Shotgun\", \"Shotgun\", 1.2, 5, 3, 75, 3)";
-            break;
-        case "Knife":
-            action = "addWeapon(\"Knife\", \"Knife\", 0.7, 9, 2, 25, 0)";
-            break;
-        case "Bow":
-            action = "addWeapon(\"Bow\", \"Bow\", 1, 11, 3, 150, 1)";
-            break;
-        case "Axe":
-            action = "addWeapon(\"Axe\", \"Axe\", 0.9, 10, 1, 30, 0)";
-            break;
-    }
-    changePlayerStats(action);
-    //console.log(action);
+
+function btnClick_Click(ButtonID) {
+    var fs = require('fs');
+    fs.writeFile('dataTransfer.json', JSON.stringify(ButtonID), 'utf-8', callback);
+    //let action = "";
+    //switch (ButtonID) {
+    //    case "Speed":
+    //        action = "increaseSpeed()";
+    //        break;
+    //    case "HP":
+    //        action = "increaseHP()";
+    //        break;
+    //    case "Damage":
+    //        action = "increaseAttack()";
+    //        break;
+    //    case "Armor":
+    //        action = "increaseArmor()";
+    //        break;
+    //    case "Attackspeed":
+    //        action = "increaseAttackSpeed()";
+    //        break;
+
+    //    case "Slingshot":
+    //        action = "addWeapon(\"Slingshot\", \"Slingshot\", 1.3, 15, 3, 100, 1)";
+    //        break;
+    //    case "Tree":
+    //        action = "addWeapon(\"Tree\", \"Tree\", 1.5, 20, 1, 40, 0)";
+    //        break;
+    //    case "Shotgun":
+    //        action = "addWeapon(\"Shotgun\", \"Shotgun\", 1.2, 5, 3, 75, 3)";
+    //        break;
+    //    case "Knife":
+    //        action = "addWeapon(\"Knife\", \"Knife\", 0.7, 9, 2, 25, 0)";
+    //        break;
+    //    case "Bow":
+    //        action = "addWeapon(\"Bow\", \"Bow\", 1, 11, 3, 150, 1)";
+    //        break;
+    //    case "Axe":
+    //        action = "addWeapon(\"Axe\", \"Axe\", 0.9, 10, 1, 30, 0)";
+    //        break;
+    //}
+/*    sendPlayerStats(action);*/
 
     //Ajax here
 
-    function changePlayerStats(action) {
-        $.ajax({
-            type: "GET",
-            url: '/Index?handler=PlayerStats',
-            beforeSend: function (xhr) {
-                xhr.setRequestHeader("XSRF-TOKEN",
-                    $('input:hidden[name="__RequestVerificationToken"]').val());
-                console.log(JSON.stringify({ action }));
-            },
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            data: JSON.stringify({ action }),
-            success:
-                function (data) {
-                    console.log(data)
-                }
-        })
-    }
+    //function sendPlayerStats(action) {
+    //    $.ajax({
+    //        type: "GET",
+    //        url: '/Index?handler=PlayerStats',
+    //        beforeSend: function (xhr) {
+    //            xhr.setRequestHeader("XSRF-TOKEN",
+    //                $('input:hidden[name="__RequestVerificationToken"]').val());
+    //            console.log(JSON.stringify({ action }));
+    //        },
+    //        contentType: "application/json; charset=utf-8",
+    //        dataType: "json",
+    //        data: JSON.stringify({ action }),
+    //        success:
+    //            function (data) {
+    //                console.log(data)
+    //            }
+    //    })
+    //}
 }
 
+//Settings
 function openSettings() {
     document.getElementById('openSettings').style.display = "flex";
 }
 
-// Function to close the modal
 function closeSettings() {
     document.getElementById('openSettings').style.display = "none";
 }
 
-
-
 //Credits
-// Function to open the modal
 function openCredits() {
     document.getElementById('creditsModal').style.display = "flex";
 }
 
-// Function to close the modal
 function closeCredits() {
     document.getElementById('creditsModal').style.display = "none";
 }

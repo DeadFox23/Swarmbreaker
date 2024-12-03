@@ -19,12 +19,5 @@ namespace Swarmbreaker.Pages
 		{
 
 		}
-
-		public JsonResult OnGetPlayerStats(String data)
-        {
-            Console.WriteLine(data);
-
-            return new JsonResult(new { test="test" });
-        }
-    }
+	}
 }
