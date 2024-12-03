@@ -93,9 +93,9 @@ function generatePopUp()
 
 
 
-function btnClick_Click(ButtonID) {
-    var fs = require('fs');
-    fs.writeFile('dataTransfer.json', JSON.stringify(ButtonID), 'utf-8', callback);
+async function btnClick_Click(ButtonID) {
+
+
     //let action = "";
     //switch (ButtonID) {
     //    case "Speed":
