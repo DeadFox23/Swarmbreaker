@@ -28,8 +28,9 @@ namespace Swarmbreaker.Pages
             
         }
 
-        public IActionResult OnGetWindowSize(String myData)
+        public JsonResult OnGetWindowSize(String myData)
         {
+            Console.WriteLine("test");
             height = Int32.Parse(Regex.Match(myData, "(?<=\\bHeight\\b\\W:\\s)[0-9]+(?=,)").ToString());
             width = Int32.Parse(Regex.Match(myData, "(?<=\\bWidth\\b\\W:\\s)[0-9]+(?=,)").ToString());
             return new JsonResult(new {});

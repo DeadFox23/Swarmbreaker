@@ -129,12 +129,12 @@ function btnClick_Click(ButtonID) {
             action = "addWeapon(\"Axe\", \"Axe\", 0.9, 10, 1, 30, 0)";
             break;
     }
+    changePlayerStats(action);
     console.log(action);
 
     //Ajax here
 
-    window.addEventListener('', changePlayerStats);
-    function changePlayerStats() {
+    function changePlayerStats(action) {
         $.ajax({
             type: "GET",
             url: '/Index?handler=WindowSize',
@@ -144,10 +144,11 @@ function btnClick_Click(ButtonID) {
             },
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            data: JSON.stringify({action})
-        }).done(function (data) {
-            console.log(data);
-            console.log("hi");
+            data: JSON.stringify({ action }),
+            success:
+                function (data) {
+
+                }
         })
     }
 }
@@ -175,23 +176,7 @@ function closeCredits() {
 }
 
 
-//Fullscreen function
-// Get the checkbox element
-const fullscreenCheckbox = document.getElementById('fullscreenCheckbox');
 
-// Attach an event listener to the checkbox
-fullscreenCheckbox.addEventListener('change', function () {
-    // Trigger the fullscreen function based on the checkbox state
-    if (this.checked) {
-        // Enable fullscreen when checked
-        document.documentElement.requestFullscreen();
-    } else {
-        // Exit fullscreen when unchecked
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
-        }
-    }
-});
 //VolumeSlider
 const music = document.getElementById('backgroundMusic');
 const volumeSlider = document.getElementById('volumeSlider');
