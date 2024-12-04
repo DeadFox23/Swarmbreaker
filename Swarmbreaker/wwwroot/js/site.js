@@ -93,47 +93,123 @@ document.addEventListener("DOMContentLoaded", function () {
                 popup.style.display = 'none';
             });
         });
-    });
+    });   
+}
 
+function action(ButtonID) {
+    $.ajax({
+        type: "GET",
+        url: '/DefaultMap?handler=Action',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+                $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+        data: { action: ButtonID },
+        success: function (response) {
+        },
+        failure: function (response) {
 
-    function btnClick_Click(ButtonID)
-    {
-        let action = "";
-        switch(id) {
-            case "Slingshot":
-                action = "addWeapon";
-            break;
-            case "Tree":
-
-            break;
-            case "Shotgun":
-
-            break;
-            case "Knife":
-
-            break;
-            case "Bow":
-
-            break;
-            case "Axe":
-
-            break;
-            case "HP":
-                Console.WriteLine("HP");
-            break;
-            case "Damage":
-                Console.WriteLine("Damage");
-            break;
-            case "Armor":
-                Console.WriteLine("Armor");
-            break;
+            alert(response);
         }
-        console.log(action);
-        //Ajax here
-     }
-});
+    })
+}
+    
 
 
+
+
+function btnClick_Click(ButtonID) {
+    
+
+    action(ButtonID)
+
+//    let action = "";
+//    switch (ButtonID) {
+//        case "Speed":
+//            action = "increaseSpeed()";
+//            break;
+//        case "HP":
+//            action = "increaseHP()";
+//            break;
+//        case "Damage":
+//            action = "increaseAttack()";
+//            break;
+//        case "Armor":
+//            action = "increaseArmor()";
+//            break;
+//        case "Attackspeed":
+//            action = "increaseAttackSpeed()";
+//            break;
+
+//        case "Slingshot":
+//            action = "addWeapon(\"Slingshot\", \"Slingshot\", 1.3, 15, 3, 100, 1)";
+//            break;
+//        case "Tree":
+//            action = "addWeapon(\"Tree\", \"Tree\", 1.5, 20, 1, 40, 0)";
+//            break;
+//        case "Shotgun":
+//            action = "addWeapon(\"Shotgun\", \"Shotgun\", 1.2, 5, 3, 75, 3)";
+//            break;
+//        case "Knife":
+//            action = "addWeapon(\"Knife\", \"Knife\", 0.7, 9, 2, 25, 0)";
+//            break;
+//        case "Bow":
+//            action = "addWeapon(\"Bow\", \"Bow\", 1, 11, 3, 150, 1)";
+//            break;
+//        case "Axe":
+//            action = "addWeapon(\"Axe\", \"Axe\", 0.9, 10, 1, 30, 0)";
+//            break;
+//    }
+//    sendPlayerStats(action);
+
+//    /*Ajax here*/
+
+//    function sendPlayerStats(action) {
+//        $.ajax({
+//            type: "GET",
+//            url: '/Index?handler=PlayerStats',
+//            beforeSend: function (xhr) {
+//                xhr.setRequestHeader("XSRF-TOKEN",
+//                    $('input:hidden[name="__RequestVerificationToken"]').val());
+//                console.log(JSON.stringify({ action }));
+//            },
+//            contentType: "application/json; charset=utf-8",
+//            dataType: "json",
+//            data: JSON.stringify({ action }),
+//            success:
+//                function (data) {
+//                    console.log(data)
+//                }
+//        })
+//    }
+}
+
+//Settings
+function openSettings() {
+    document.getElementById('openSettings').style.display = "flex";
+}
+
+function closeSettings() {
+    document.getElementById('openSettings').style.display = "none";
+}
+
+//Credits
+function openCredits() {
+    document.getElementById('creditsModal').style.display = "flex";
+}
+
+function closeCredits() {
+    document.getElementById('creditsModal').style.display = "none";
+}
+
+
+
+//VolumeSlider
+//const music = document.getElementById('backgroundMusic');
+//const volumeSlider = document.getElementById('volumeSlider');
+//volumeSlider.addEventListener('input', (event) => {
+//    music.volume = event.target.value;
+//});
 
 
 updateTimer();
