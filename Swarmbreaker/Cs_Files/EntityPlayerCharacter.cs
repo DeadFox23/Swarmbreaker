@@ -66,6 +66,8 @@ namespace Swarmbreaker.Cs_Files
             {
                 this.statXP -= (int)Math.Pow(this.statLevel / 0.5, 3);
                 this.statLevel++;
+                //timer pause
+                //add LevelUp popup              
             }
         }
         public void levelDown() {
