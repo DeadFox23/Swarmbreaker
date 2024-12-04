@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Numerics;
-using System.Security.Cryptography.X509Certificates;
 
 namespace Swarmbreaker.Cs_Files
 {
@@ -15,42 +13,96 @@ namespace Swarmbreaker.Cs_Files
         public float statBonusAttack { get; set; } = 0;
         public float statBonusArmor { get; set; } = 0;
         public float statAttackSpeed { get; set; } = 0;
-        public float statBaseAttack { get; set; } = 0;
 
         public int statXP=0;
         public int statLevel=1;
 
-        public void move(Vector2 direction, int ms, int sizeX, int sizeY)
+        public List<EntityEnemy>? move(Vector2 direction, int sizeX, int sizeY, List<EntityEnemy> enemies)
         {
-            this.x = (x+(int)(direction.X*speed)>sizeX?sizeX: (int)(direction.X * speed));
-            this.y = (y+(int)(direction.Y*speed)>sizeY?sizeY: (int)(direction.Y * speed));
-            this.attack(ms);
+            this.x = (x + (int)(direction.X * speed) > sizeX ? sizeX : (int)(direction.X * speed));
+            this.y = (y + (int)(direction.Y * speed) > sizeY ? sizeY : (int)(direction.Y * speed));
+
+
+
+
+            if (!(enemies == null || enemies.Count == 0))
+            {
+
+                EntityEnemy? closestEnemy = null;
+                float closestDistance = float.MaxValue;
+                Vector2 currentPosition = new Vector2(x, y);
+
+                foreach (var enemy in enemies)
+                {
+                    Vector2 enemyPosition = new Vector2(enemy.x, enemy.y);
+                    float distance = Vector2.Distance(currentPosition, enemyPosition);
+
+                    if (distance < closestDistance)
+                    {
+                        closestDistance = distance;
+                        closestEnemy = enemy;
+                    }
+                }
+
+
+                if(closestEnemy != null) enemies[enemies.IndexOf(closestEnemy)] = this.attack(enemies[enemies.IndexOf(closestEnemy)]);
+
+
+            }
+            return enemies;
         }
-        public void death() { }
-        public void attack(int ms) {
-            foreach(Weapon weapon in equippedWeapons) { weapon.attack(ms); }
+        public bool death()
+        {
+            return (this.statBaseHP <= 0);
         }
-        public void xpUp(int xp) {
+        public EntityEnemy attack(EntityEnemy closestEnemy) {
+            foreach(Weapon weapon in equippedWeapons) { closestEnemy = weapon.attack(closestEnemy,this.x, this.y); }
+            return (closestEnemy);
+        }
+        public void xpUp(int xp)
+        {
             this.statXP += xp;
-            if(this.statXP > this.statLevel * 100) {
-            
+            if (this.statXP > Math.Pow(this.statLevel / 0.5, 3))
+            {
+                this.statXP -= (int)Math.Pow(this.statLevel / 0.5, 3);
+                this.statLevel++;
             }
         }
         public void levelDown() {
             throw new NotImplementedException();
         }
-        public EntityPlayerCharacter(int y, int x, float speed, float statBaseHP,float statBaseAttack, Weapon equippedWeapon, float statBonusAttack, float statBonusArmor, float statAttackSpeed)
+        public EntityPlayerCharacter(int y, int x, float speed, float statBaseHP, Weapon equippedWeapon, float statBonusAttack, float statBonusArmor, float statAttackSpeed)
         {
             this.y = y;
             this.x = x;
             this.speed = speed;
             this.statBaseHP = statBaseHP;
             this.equippedWeapons = new Weapon[6];
-            this.equippedWeapons[0] = (equippedWeapon ?? new Weapon("placeholder", "placeholder", (float)0.0, (float)0.0, 0, 0, 0));
-            this.statBaseAttack = statBaseAttack;
+            this.equippedWeapons[0] = (equippedWeapon ?? new Weapon(0));
             this.statBonusAttack = statBonusAttack;
             this.statBonusArmor = statBonusArmor;
             this.statAttackSpeed = statAttackSpeed;
+        }
+
+        public void addWeapon(int weaponType){
+            if (this.equippedWeapons[5] != null) {
+                for (int i = 0; i < equippedWeapons.Length-1; i++) {
+                    if (equippedWeapons[i] == null)
+                    {
+                        new Weapon(weaponType);
+                        break;
+                    }
+                    if (equippedWeapons[i].weaponType == weaponType)
+                    {
+                        equippedWeapons[i].Upgrade();
+                        break;
+                    }
+                }
+            }
+        }
+
+        public void increaseSpeed(){
+            this.speed++;
         }
     }
 }
