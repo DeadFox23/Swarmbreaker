@@ -82,7 +82,7 @@ namespace Swarmbreaker.Pages
                     //    {
 
                     //}
-                    players.ElementAt(0).increaseSpeed();
+                    //players.ElementAt(0).increaseSpeed();
                     break;
                 case "HP":
                     //increaseHP();

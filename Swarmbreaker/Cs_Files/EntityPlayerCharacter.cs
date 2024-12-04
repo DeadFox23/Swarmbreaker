@@ -94,7 +94,7 @@ namespace Swarmbreaker.Cs_Files
                     }
                     if (equippedWeapons[i].weaponType == weaponType)
                     {
-                        equippedWeapons[i].Upgrade();
+                        equippedWeapons[i].Upgrade(2);
                         break;
                     }
                 }
