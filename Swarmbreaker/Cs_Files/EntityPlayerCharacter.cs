@@ -104,5 +104,21 @@ namespace Swarmbreaker.Cs_Files
         public void increaseSpeed(){
             this.speed++;
         }
-    }
+		public void increaseHP()
+		{
+			this.statBaseHP++;
+		}
+		public void increaseAttack()
+		{
+			this.statBonusAttack++;
+		}
+		public void increaseArmor()
+		{
+			this.statBonusArmor++;
+		}
+		public void increaseAttackSpeed()
+		{
+			this.statAttackSpeed++;
+		}
+	}
 }

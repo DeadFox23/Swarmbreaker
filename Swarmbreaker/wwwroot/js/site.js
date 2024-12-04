@@ -23,7 +23,6 @@ function reportWindowSize() {
     })
 }
 
-//index
 var index;
 var upgrades;
 
@@ -54,7 +53,7 @@ function generatePopUp() {
         popupContent.innerHTML = "<h2>Level up</h2>";
         //Weapons and stats
         var stats = ["Speed", "HP", "Damage", "Armor", "Attackspeed"];
-        var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Bow", "Axe"];
+        var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Axe"];
 
         for (let i = 0; i < 3; i++) {
             const newButton = document.createElement("button");
