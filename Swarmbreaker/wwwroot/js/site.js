@@ -4,25 +4,24 @@
 
 //Defaultmap
 
-//window.addEventListener('resize', reportWindowSize);
-//function reportWindowSize() {
-//    $.ajax({
-//        type: "GET",
-//        url: '/DefaultMap?handler=Data',
-//        beforeSend: function (xhr) {
-//            xhr.setRequestHeader("XSRF-TOKEN",
-//                $('input:hidden[name="__RequestVerificationToken"]').val());
-//        },
-//        contentType: "application/json; charset=utf-8",
-//        dataType: "json",
-//        data: JSON.stringify({ Height: window.innerHeight, Width: window.innerWidth }),
-//        success:
-//            function (data) {
-//            console.log(data);
-//            console.log("hi");
-//        }
-//    })
-//}
+window.addEventListener('resize', reportWindowSize);
+function reportWindowSize() {
+    $.ajax({
+        type: "GET",
+        url: '/DefaultMap?handler=Data',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+                $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+
+        data: { Height: window.innerHeight, Width: window.innerWidth },
+        success:
+            function (data) {
+            console.log(data);
+            console.log("hi");
+        }
+    })
+}
 
 //index
 var index;
@@ -142,19 +141,19 @@ updateTimer();
 function enemyPosition() {
     $.ajax({
         type: "GET",
-        url: '/DefaultMap?handler=Data',
+        url: '/DefaultMap?handler=Enemy',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
-            console.log(JSON.stringify("help"))
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data:  JSON.stringify("help"),
+        data: {baum : 'hi'},
         success:
             function (data) {
                 const { positions, nextInterval } = data;
-                //if (data.match(/positions/))
+                console.log(data);
+                //if (data.isMatch(/positions/))
                 //updateEnemyPosition(positions);
                 //updateTimer(nextInterval);
             }
@@ -170,7 +169,7 @@ function updateEnemyPosition(positions) {
     });
 }
 let timerID = null;
-let currentInterval = 2000;
+let currentInterval = setInterval(updateTimer, 2000);
 function updateTimer() {
-    if (timerID) clearInterval(timerID);
+    enemyPosition();
 }

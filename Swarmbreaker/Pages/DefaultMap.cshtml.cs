@@ -22,17 +22,21 @@ namespace Swarmbreaker.Pages
             Main();
             
         }
-
-        public JsonResult OnGetData(string myData)
+        [HttpGet]
+        public IActionResult OnGetData(string Height,string Width)
         {
-            Console.WriteLine("help");
+            Console.WriteLine(Height);
             
 //"(?<=\\bHeight\\b\\W:\\s)[0-9]+"))
 
 
-			return new JsonResult(new { V = "test" });
+			return new JsonResult(new { height = Height, width = Width });
         }
-
+        public IActionResult OnGetEnemy(string baum)
+        {
+            Console.WriteLine(baum);
+            return new JsonResult(new { b = "bbbbb" });
+        }
 
 
 		public void Main()
