@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     openPopupBtn.addEventListener('click', () => {
 
-        popupContent.innerHTML = "<h2>Level up</h2>"; 
+        popupContent.innerHTML = "<h2>Level up</h2>";
 
         var stats = ["HP", "Damage", "Armor"];
         var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Bow", "Axe"];
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const newButton = document.createElement("button");
             newButton.classList.add("closePopupBtn");
             newButton.setAttribute("data-close", "true");
-            
+
 
             if (randomBool() == 1) {
                 index = randomIndex(2, stats, weapons);
@@ -93,8 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 popup.style.display = 'none';
             });
         });
-    });   
-}
+    });
+});
 
 function btnClick_Click(ButtonID) { action(ButtonID) }
 function action(ButtonID) {
@@ -154,9 +154,7 @@ function enemyPosition() {
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
         },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: {baum : 'hi'},
+        data: {baum : "baum"},
         success:
             function (data) {
                 
@@ -176,7 +174,7 @@ function updateEnemyPosition(positions) {
         }
     });
 }
-let timerID = null;
+
 let currentInterval = setInterval(updateTimer, 2000);
 function updateTimer() {
     enemyPosition();

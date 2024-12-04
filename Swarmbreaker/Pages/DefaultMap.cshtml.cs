@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Numerics;
 using System.Security.Principal;
 using System.Text.RegularExpressions;
 using System.Timers;
@@ -11,7 +12,7 @@ namespace Swarmbreaker.Pages
     public class DefaultMap : PageModel
     {
         [BindProperty]
-        public required List<EntityEnemy> entities { get; set; }
+        public required List<EntityEnemy> enemys { get; set; }
         public required List<EntityPlayerCharacter> players { get; set; }
         public int waveNumber { get; set; }
         public System.Timers.Timer? timer;
@@ -34,7 +35,10 @@ namespace Swarmbreaker.Pages
         }
         public IActionResult OnGetEnemy(string baum)
         {
-            Console.WriteLine(baum);
+            //foreach (var enemy in enemys) {
+                
+            //    enemy.move(players);
+            //}
             return new JsonResult(new { b = "bbbbb" });
         }
 
@@ -50,13 +54,13 @@ namespace Swarmbreaker.Pages
         public void spawn() {
             players = new List<EntityPlayerCharacter>();
             //players.Add(new EntityPlayerCharacter());
-            entities = new List<EntityEnemy>();
+            enemys = new List<EntityEnemy>();
             Random random = new Random();
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
             for (int i = 0; i <= amountEnemy; i++) {
-				entities.Add(new EntityEnemy());
-                entities.ElementAt(i).y = random.Next(-100, height+100);
-				entities.ElementAt(i).x = random.Next(-100, width+100);
+				enemys.Add(new EntityEnemy());
+                enemys.ElementAt(i).y = random.Next(-100, height+100);
+				enemys.ElementAt(i).x = random.Next(-100, width+100);
 
 			}
         }
