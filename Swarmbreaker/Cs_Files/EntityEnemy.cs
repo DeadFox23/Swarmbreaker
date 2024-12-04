@@ -57,8 +57,10 @@ namespace Swarmbreaker.Cs_Files
             this.y += (int)direction.Y;
             this.attack(closestPlayer);
         }
-        public void death() { }
-        public void attack(EntityPlayerCharacter target) {
+        public bool death() {
+            return(this.statBaseHP <= 0);
+        }
+        public EntityPlayerCharacter attack(EntityPlayerCharacter target) {
             //falls target in nähe von self
             if (target.x >= this.x-10 && target.x<=this.x+10 && target.y >= this.y - 10 && target.y <= this.y + 10)
             {
@@ -66,9 +68,8 @@ namespace Swarmbreaker.Cs_Files
                 int damage = (int) Math.Ceiling((this.statBaseAttack * this.statBonusAttack) - target.statBonusArmor);
                 target.statBaseHP = target.statBaseHP - (damage > 0 ? damage : 0);
 
-
             }
-            return;
+            return target;
         }
 
     }
