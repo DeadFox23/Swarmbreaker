@@ -8,17 +8,18 @@ window.addEventListener('resize', reportWindowSize);
 function reportWindowSize() {
     $.ajax({
         type: "GET",
-        url: '/Index?handler=WindowSize',
+        url: '/DefaultMap?handler=Data',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
         },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: JSON.stringify({ Height: window.innerHeight, Width: window.innerWidth })
-    }).done(function (data) {
-        console.log(data);
-        console.log("hi");
+
+        data: { Height: window.innerHeight, Width: window.innerWidth },
+        success:
+            function (data) {
+            console.log(data);
+            console.log("hi");
+        }
     })
 }
 
@@ -39,20 +40,24 @@ function randomBool()
     return Math.floor(Math.random() * 2);
 }
 
-//popupLevelUp
-document.addEventListener("DOMContentLoaded", generatePopUp);
-function generatePopUp()
-{
-    const openPopupBtn = document.getElementById('openLevelUp'); // Select the open button
-    const popup = document.getElementById('levelUp'); // Select the popup container
-    const popupContent = document.querySelector('.levelUp-content'); // Select the content area
+function addHP() { statBaseHP + 1; }
+function addDamage() { statBonusAttack + 1; }
+function addArmor() { statBonusArmor + 1; }
+
+
+
+
+document.addEventListener("DOMContentLoaded", function () {
+    const openPopupBtn = document.getElementById('openPopupBtn'); // Select the open button
+    const popup = document.getElementById('popup'); // Select the popup container
+    const popupContent = document.querySelector('.popup-content'); // Select the content area
 
 
     openPopupBtn.addEventListener('click', () => {
 
         popupContent.innerHTML = "<h2>Level up</h2>"; 
-        //Weapons and stats
-        var stats = ["Speed", "HP", "Damage", "Armor", "Attackspeed"];
+
+        var stats = ["HP", "Damage", "Armor"];
         var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Bow", "Axe"];
 
         for (let i = 0; i < 3; i++) {
@@ -74,7 +79,7 @@ function generatePopUp()
                 stats.splice(index, 1);
             }
 
-            newButton.onclick = function () {btnClick_Click(newButton.id)};
+            newButton.onclick = function () { btnClick_Click(newButton.id) };
             popupContent.appendChild(newButton);
         }
 
@@ -207,42 +212,40 @@ function closeCredits() {
 //});
 
 
-
-//Enemystuff
-
-let timerID = null;
-let currentInterval = 2000;
-
 updateTimer();
 
-function enemyPositionAndTimer() {
+function enemyPosition() {
     $.ajax({
         type: "GET",
-        url: '/Index?handler=enemyPositionAndTimer',
+        url: '/DefaultMap?handler=Enemy',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
         },
         contentType: "application/json; charset=utf-8",
         dataType: "json",
-        data: JSON.stringify({ Timer: currentInterval })
-    }).done(function (data) {
-            const { positions, nextInterval } = data;
-            updateEnemyPosition(positions);
-            updateTimer(nextInterval);
+        data: {baum : 'hi'},
+        success:
+            function (data) {
+                const { positions, nextInterval } = data;
+                console.log(data);
+                //if (data.isMatch(/positions/))
+                //updateEnemyPosition(positions);
+                //updateTimer(nextInterval);
+            }
     })
 }
 function updateEnemyPosition(positions) {
     positions.forEach(({ id, top, left }) => {
         const img = document.getElementById(id);
         if (img) {
-            img.style.top = `${top} px`;
+            img.style.top = `${top}px`;
             img.style.left = `${left}px`;
         }
     });
 }
-function updateTimer(newInterval) {
-    if (timerID) clearInterval(timerID);
-    //currentInterval = newInterval;
-    timerID = setInterval(enemyPositionAndTimer, currentInterval);
+let timerID = null;
+let currentInterval = setInterval(updateTimer, 2000);
+function updateTimer() {
+    enemyPosition();
 }
