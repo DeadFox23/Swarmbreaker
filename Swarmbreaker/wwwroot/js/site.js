@@ -40,31 +40,27 @@ function randomBool()
     return Math.floor(Math.random() * 2);
 }
 
-function addHP() { statBaseHP + 1; }
-function addDamage() { statBonusAttack + 1; }
-function addArmor() { statBonusArmor + 1; }
 
 
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const openPopupBtn = document.getElementById('openPopupBtn'); // Select the open button
-    const popup = document.getElementById('popup'); // Select the popup container
-    const popupContent = document.querySelector('.popup-content'); // Select the content area
+document.addEventListener("DOMContentLoaded", generatePopUp);
+function generatePopUp() {
+    const openPopupBtn = document.getElementById('openLevelUp'); // Select the open button
+    const popup = document.getElementById('levelUp'); // Select the popup container
+    const popupContent = document.querySelector('.levelUp-content'); // Select the content area
 
 
     openPopupBtn.addEventListener('click', () => {
 
-        popupContent.innerHTML = "<h2>Level up</h2>"; 
-
-        var stats = ["HP", "Damage", "Armor"];
+        popupContent.innerHTML = "<h2>Level up</h2>";
+        //Weapons and stats
+        var stats = ["Speed", "HP", "Damage", "Armor", "Attackspeed"];
         var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Bow", "Axe"];
 
         for (let i = 0; i < 3; i++) {
             const newButton = document.createElement("button");
             newButton.classList.add("closePopupBtn");
             newButton.setAttribute("data-close", "true");
-            
+
 
             if (randomBool() == 1) {
                 index = randomIndex(2, stats, weapons);
@@ -93,46 +89,46 @@ document.addEventListener("DOMContentLoaded", function () {
                 popup.style.display = 'none';
             });
         });
-    });   
+    });
 }
 
 function btnClick_Click(ButtonID) { action(ButtonID) }
 function action(ButtonID) {
-    $.ajax({
-        type: "GET",
-        url: '/DefaultMap?handler=Action',
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader("XSRF-TOKEN",
-                $('input:hidden[name="__RequestVerificationToken"]').val());
-        },
-        data: { action: ButtonID },
-        success: function (response) {
-        },
-        failure: function (response) {
+        $.ajax({
+            type: "GET",
+            url: '/DefaultMap?handler=Action',
+            beforeSend: function (xhr) {
+                xhr.setRequestHeader("XSRF-TOKEN",
+                    $('input:hidden[name="__RequestVerificationToken"]').val());
+            },
+            data: { action: ButtonID },
+            success: function (response) {
+            },
+            failure: function (response) {
 
-            alert(response);
-        }
-    })
+                alert(response);
+            }
+        })
 }
 
 
 //Settings
 function openSettings() {
-    document.getElementById('openSettings').style.display = "flex";
-}
+        document.getElementById('openSettings').style.display = "flex";
+    }
 
 function closeSettings() {
-    document.getElementById('openSettings').style.display = "none";
-}
+        document.getElementById('openSettings').style.display = "none";
+    }
 
 //Credits
 function openCredits() {
-    document.getElementById('creditsModal').style.display = "flex";
-}
+        document.getElementById('creditsModal').style.display = "flex";
+    }
 
 function closeCredits() {
-    document.getElementById('creditsModal').style.display = "none";
-}
+        document.getElementById('creditsModal').style.display = "none";
+    }
 
 
 
@@ -179,5 +175,5 @@ function updateEnemyPosition(positions) {
 let timerID = null;
 let currentInterval = setInterval(updateTimer, 2000);
 function updateTimer() {
-    enemyPosition();
+    /*enemyPosition();*/
 }
