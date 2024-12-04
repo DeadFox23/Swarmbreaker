@@ -151,7 +151,7 @@ function enemyPosition() {
         data: {baum : 'hi'},
         success:
             function (data) {
-                const { positions, nextInterval } = data;
+                
                 console.log(data);
                 //if (data.isMatch(/positions/))
                 //updateEnemyPosition(positions);
