@@ -8,21 +8,46 @@
         <h1 class="header">Swarmbreaker</h1>
         <div id="gamemenu">
             <button type="button" onclick="location.href='@Url.Page("/Defaultmap")'">Play</button><br />
-            <button type="button" onclick="location.href='@Url.Page("/Defaultmap")'">Options</button><br />
-            <button type="button" onclick="location.href='@Url.Page("/Defaultmap")'">Credits</button><br />
+            <button type="button" onclick="openSettings()">Options</button><br />
+            <button class="btn-open" onclick="openCredits()">Credits</button><br />
         </div>
 
-
-
-
-        <button id="openPopupBtn">Popup öffnen</button>
-
-        <!-- Das Popup-Fenster -->
-        <div id="popup" class="popup">
-            <div class="popup-content">
+        
+        <!-- The Modal -->
+        <div id="creditsModal" class="modal">
+            <!-- Modal Content -->
+            <div class="credits-content">
+                <h2>Project Swarmbreaker<br />Credits</h2>
+                <br />
+                <h3>Programmers</h3>
+                <ul>
+                    <li>Nico</li>
+                    <li>Marco</li>
+                    <li>DeadFox23</li>
+                    <li>Muemmelfrau</li>
+                </ul>
+                <button class="btn-close" onclick="closeCredits()"></button>
             </div>
         </div>
-        @* <audio controls autoplay><source src="audiodatei.mp3" type="audio/mp3"></audio> *@
+
+        <div id="openSettings" class="popup">
+            <div id="settings-content">
+                <h2>Options</h2>
+                Press F11 for Fullscreen<br /><br />
+                Volume
+                <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="1">
+                <button class="btn-close" onclick="closeSettings()"></button>
+            </div>
+        </div>
+
+
+        <button id="openLevelUp">Popup öffnen</button>
+        <!-- Das Popup-Fenster -->
+        <div id="levelUp" class="popup">
+            <div class="levelUp-content">
+            </div>
+        </div>
+        @* <audio id="backgroundMusic" src="music.mp3" loop></audio> *@
     </div>
 </div>
 

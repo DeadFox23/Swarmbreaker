@@ -28,8 +28,9 @@ namespace Swarmbreaker.Pages
             
         }
 
-        public IActionResult OnGetWindowSize(String myData)
+        public JsonResult OnGetWindowSize(String myData)
         {
+            Console.WriteLine("test");
             height = Int32.Parse(Regex.Match(myData, "(?<=\\bHeight\\b\\W:\\s)[0-9]+(?=,)").ToString());
             width = Int32.Parse(Regex.Match(myData, "(?<=\\bWidth\\b\\W:\\s)[0-9]+(?=,)").ToString());
             return new JsonResult(new {});
@@ -48,7 +49,6 @@ namespace Swarmbreaker.Pages
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
             for (int i = 0; i <= amountEnemy; i++) {
 				entities.Add(new EntityEnemy());
-                entities.ElementAt(i).Id = i;
                 entities.ElementAt(i).y = random.Next(-100, height+100);
 				entities.ElementAt(i).x = random.Next(-100, width+100);
 
