@@ -48,6 +48,8 @@ namespace Swarmbreaker.Pages
         }
         
         public void spawn() {
+            players = new List<EntityPlayerCharacter>();
+            //players.Add(new EntityPlayerCharacter());
             entities = new List<EntityEnemy>();
             Random random = new Random();
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
@@ -57,6 +59,65 @@ namespace Swarmbreaker.Pages
 				entities.ElementAt(i).x = random.Next(-100, width+100);
 
 			}
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        public IActionResult OnGetAction(string action)
+        {
+            Console.WriteLine(action);
+            switch (action)
+            {
+                case "Speed":
+                    //foreach(EntityPlayerCharacter player : players)
+                    //    {
+
+                    //}
+                    players.ElementAt(0).increaseSpeed();
+                    break;
+                case "HP":
+                    //increaseHP();
+                    break;
+                case "Damage":
+                    //increaseAttack();
+                    break;
+                case "Armor":
+                    //increaseArmor();
+                    break;
+                case "Attackspeed":
+                    //increaseAttackSpeed();
+                    break;
+
+                case "Slingshot":
+                    //addWeapon(\"Slingshot\", \"Slingshot\", 1.3, 15, 3, 100, 1);
+                    break;
+                case "Tree":
+                    //addWeapon(\"Tree\", \"Tree\", 1.5, 20, 1, 40, 0);
+                    break;
+                case "Shotgun":
+                    //addWeapon(\"Shotgun\", \"Shotgun\", 1.2, 5, 3, 75, 3);
+                    break;
+                case "Knife":
+                    //addWeapon(\"Knife\", \"Knife\", 0.7, 9, 2, 25, 0);
+                    break;
+                case "Bow":
+                    //addWeapon(\"Bow\", \"Bow\", 1, 11, 3, 150, 1);
+                    break;
+                case "Axe":
+                    //addWeapon(\"Axe\", \"Axe\", 0.9, 10, 1, 30, 0);
+                    break;
+            }
+
+            return new JsonResult(new { });
         }
     }
 }

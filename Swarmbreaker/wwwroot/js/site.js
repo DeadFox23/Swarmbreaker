@@ -93,47 +93,55 @@ document.addEventListener("DOMContentLoaded", function () {
                 popup.style.display = 'none';
             });
         });
-    });
+    });   
+}
 
+function btnClick_Click(ButtonID) { action(ButtonID) }
+function action(ButtonID) {
+    $.ajax({
+        type: "GET",
+        url: '/DefaultMap?handler=Action',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+                $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+        data: { action: ButtonID },
+        success: function (response) {
+        },
+        failure: function (response) {
 
-    function btnClick_Click(ButtonID)
-    {
-        let action = "";
-        switch(id) {
-            case "Slingshot":
-                action = "addWeapon";
-            break;
-            case "Tree":
-
-            break;
-            case "Shotgun":
-
-            break;
-            case "Knife":
-
-            break;
-            case "Bow":
-
-            break;
-            case "Axe":
-
-            break;
-            case "HP":
-                Console.WriteLine("HP");
-            break;
-            case "Damage":
-                Console.WriteLine("Damage");
-            break;
-            case "Armor":
-                Console.WriteLine("Armor");
-            break;
+            alert(response);
         }
-        console.log(action);
-        //Ajax here
-     }
-});
+    })
+}
 
 
+//Settings
+function openSettings() {
+    document.getElementById('openSettings').style.display = "flex";
+}
+
+function closeSettings() {
+    document.getElementById('openSettings').style.display = "none";
+}
+
+//Credits
+function openCredits() {
+    document.getElementById('creditsModal').style.display = "flex";
+}
+
+function closeCredits() {
+    document.getElementById('creditsModal').style.display = "none";
+}
+
+
+
+//VolumeSlider
+//const music = document.getElementById('backgroundMusic');
+//const volumeSlider = document.getElementById('volumeSlider');
+//volumeSlider.addEventListener('input', (event) => {
+//    music.volume = event.target.value;
+//});
 
 
 updateTimer();

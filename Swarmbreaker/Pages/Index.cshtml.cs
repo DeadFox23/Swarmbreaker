@@ -20,10 +20,7 @@ namespace Swarmbreaker.Pages
 
 		}
 
-		public void OnPost(string action) {
-			Console.WriteLine(action);
+        
 
-		}	
-
-	}
+    }
 }
