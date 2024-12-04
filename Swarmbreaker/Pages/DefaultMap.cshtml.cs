@@ -18,29 +18,29 @@ namespace Swarmbreaker.Pages
         int height = 1080;
         int width = 1920;
       
-
-        public void OnPost()
-        {
-
-        }
         public void OnGet() {
             Main();
             
         }
 
-        public JsonResult OnGetWindowSize(String myData)
+        public JsonResult OnGetData(string myData)
         {
-            Console.WriteLine("test");
-            height = Int32.Parse(Regex.Match(myData, "(?<=\\bHeight\\b\\W:\\s)[0-9]+(?=,)").ToString());
-            width = Int32.Parse(Regex.Match(myData, "(?<=\\bWidth\\b\\W:\\s)[0-9]+(?=,)").ToString());
-            return new JsonResult(new {});
+            Console.WriteLine("help");
+            
+//"(?<=\\bHeight\\b\\W:\\s)[0-9]+"))
+
+
+			return new JsonResult(new { V = "test" });
         }
-        public void Main()
-        {// FIX THE WEAPON LATER - CREATE LIST OF POSSIBLE WEAPONS
-            players.Add(new EntityPlayerCharacter(height / 2, width / 2, 1, 100, new Weapon(0), 0, 0, 0));
+
+
+
+		public void Main()
+        {
+            
             waveNumber = 900;
             spawn();
-
+            
         }
         
         public void spawn() {

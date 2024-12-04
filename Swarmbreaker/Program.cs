@@ -1,7 +1,10 @@
+using Newtonsoft.Json.Serialization;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddMvc().AddJsonOptions(options => new DefaultContractResolver());
 
 var app = builder.Build();
 

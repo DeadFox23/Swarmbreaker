@@ -1,13 +1,12 @@
-@page "{WindowSize?}"
+@page "/DefaultMap"
 @model DefaultMap
 
 @* <img src="/pictures/betterTestPic.png" /> *@
 
 <div>
-@foreach(var item in @Model.entities)
+@for (int i = 0; i < @Model.entities.Count; i++)
 {
-	
-	//<p>@item</p>
-		<img src="/pictures/mouse_enemy.png" style="left:@($"{item.x}px"); top:@($"{item.y}px"); position:relative; width:60px;" />
+		//<p>@item</p>
+		<img src="/pictures/mouse_enemy.png" id="@i" style="left:@($"{@Model.entities[i].x}px"); top:@($"{@Model.entities[i].y}px"); position:relative; width:60px;" />
 }
 </div>
