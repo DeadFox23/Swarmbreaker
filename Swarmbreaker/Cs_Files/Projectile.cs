@@ -32,7 +32,9 @@ namespace Swarmbreaker.Cs_Files
             if (closestEnemy.x >= this.x - 10 
                 && closestEnemy.x <= this.x + 10 
                 && closestEnemy.y >= this.y - 10 
-                && closestEnemy.y <= this.y + 10) { 
+                && closestEnemy.y <= this.y + 10) {
+
+                if(penetration > 0) {
 
             
             }
