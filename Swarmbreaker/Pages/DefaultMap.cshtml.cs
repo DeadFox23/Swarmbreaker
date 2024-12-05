@@ -12,8 +12,8 @@ namespace Swarmbreaker.Pages
     public class DefaultMap : PageModel
     {
         [BindProperty]
-        public required List<EntityEnemy> entities { get; set; }
-        public required List<EntityPlayerCharacter> players { get; set; }= new List<EntityPlayerCharacter>();
+		public required List<EntityEnemy> entities { get; set; } = new List<EntityEnemy>();
+		public required List<EntityPlayerCharacter> players { get; set; } = new List<EntityPlayerCharacter>();
 		public int waveNumber { get; set; }
         public System.Timers.Timer? timer;
         int height = 1080;
@@ -42,24 +42,24 @@ namespace Swarmbreaker.Pages
 
 		public void Main()
         {
-
-            players.Add(new EntityPlayerCharacter(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5));
-            waveNumber = 900;
-            spawn();
-            
-        }
+            if(SaveData.players.Count == 0) {
+				players.Add(new EntityPlayerCharacter(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5));
+				SaveData.addPlayer(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5);
+                waveNumber = 900;
+                spawn();
+			}
+		}
         
         public void spawn() {
             
-			entities = new List<EntityEnemy>();
             Random random = new Random();
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
             for (int i = 0; i <= amountEnemy; i++) {
-				entities.Add(new EntityEnemy());
-                entities.ElementAt(i).y = random.Next(-100, height+100);
-				entities.ElementAt(i).x = random.Next(-100, width+100);
-
-			}
+                SaveData.addEnemy();
+                entities.Add(new EntityEnemy());
+                entities.ElementAt(i).y = random.Next(-100, height + 100);
+                entities.ElementAt(i).x = random.Next(-100, width + 100);
+            }
         }
 
 
@@ -68,50 +68,49 @@ namespace Swarmbreaker.Pages
 
         public IActionResult OnGetAction(string action)
         {
+            //Kontrollausgabe
 			Console.WriteLine(action);
             switch (action)
             {
                 case "Speed":
-                    foreach(EntityPlayerCharacter player in players)
+                    foreach(EntityPlayerCharacter player in SaveData.players)
                     {player.increaseSpeed();}
                     break;
                 case "HP":
-					foreach (EntityPlayerCharacter player in players)
-					{player.increaseHP();
-						Console.WriteLine("halps");
-					}
+					foreach (EntityPlayerCharacter player in SaveData.players)
+					{player.increaseHP();}
 					break;
                 case "Damage":
-					foreach (EntityPlayerCharacter player in players)
+					foreach (EntityPlayerCharacter player in SaveData.players)
 					{player.increaseAttack();}
 					break;
                 case "Armor":
-					foreach (EntityPlayerCharacter player in players)
+					foreach (EntityPlayerCharacter player in SaveData.players)
 					{player.increaseArmor();}
 					break;
                 case "Attackspeed":
-					foreach (EntityPlayerCharacter player in players)
+					foreach (EntityPlayerCharacter player in SaveData.players)
 					{player.increaseAttackSpeed();}
 					break;
 
                 case "Slingshot":
-					foreach (EntityPlayerCharacter player in players)
+					foreach (EntityPlayerCharacter player in SaveData.players)
 					{ player.addWeapon(1);}	
 					break;
                 case "Tree":
-					foreach (EntityPlayerCharacter player in players)
+					foreach (EntityPlayerCharacter player in SaveData.players)
 					{ player.addWeapon(2); }
 					break;
                 case "Shotgun":
-					foreach (EntityPlayerCharacter player in players)
+					foreach (EntityPlayerCharacter player in SaveData.players)
 					{ player.addWeapon(3); }
 					break;
                 case "Knife":
-					foreach (EntityPlayerCharacter player in players)
+					foreach (EntityPlayerCharacter player in SaveData.players)
 					{ player.addWeapon(4); }
 					break;
                 case "Axe":
-					foreach (EntityPlayerCharacter player in players)
+					foreach (EntityPlayerCharacter player in SaveData.players)
 					{ player.addWeapon(5); }
 					break;
             }

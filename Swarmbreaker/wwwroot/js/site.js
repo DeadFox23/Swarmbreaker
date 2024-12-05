@@ -39,8 +39,6 @@ function randomBool()
     return Math.floor(Math.random() * 2);
 }
 
-
-
 document.addEventListener("DOMContentLoaded", generatePopUp);
 function generatePopUp() {
     const openPopupBtn = document.getElementById('openLevelUp'); // Select the open button
@@ -101,12 +99,8 @@ function action(ButtonID) {
                     $('input:hidden[name="__RequestVerificationToken"]').val());
             },
             data: { action: ButtonID },
-            success: function (response) {
-            },
-            failure: function (response) {
-
-                alert(response);
-            }
+            success: function (response) {},
+            failure: function (response) {alert(response);}
         })
 }
 
@@ -176,3 +170,12 @@ let currentInterval = setInterval(updateTimer, 2000);
 function updateTimer() {
     /*enemyPosition();*/
 }
+
+
+//function generateDefaultMap(/*ids, positions*/) {
+//    for (let i = 0; i < ; i++) {
+//        const newImg = document.createElement('img');
+//        newImg.src = "/pictures/mouse_enemy.png";
+//        newImg.id = id;
+//    }
+//}
