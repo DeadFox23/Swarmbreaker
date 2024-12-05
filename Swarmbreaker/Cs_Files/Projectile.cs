@@ -9,12 +9,11 @@ namespace Swarmbreaker.Cs_Files
         public int range { get; set; } = 0;
         public int x { get; set; }
         public int y { get; set; }
-        public int penetration {  get; set; }
+        public int penetration { get; set; }
 
 
 
-
-        public Projectile(int radius, int speed, int range,int x, int y)
+        public Projectile(int radius, int speed, int range, int x, int y)
         {
             this.radius = radius;
             this.speed = speed;
@@ -23,10 +22,12 @@ namespace Swarmbreaker.Cs_Files
             this.y = y;
         }
 
-        public EntityEnemy move(Vector2 direction, EntityEnemy closestEnemy) {
+        public EntityEnemy move(Vector2 direction, EntityEnemy closestEnemy)
+        {
             direction *= speed;
             this.x += (int)direction.X;
             this.y += (int)direction.Y;
+
 
 
             if (closestEnemy.x >= this.x - 10 
@@ -38,9 +39,15 @@ namespace Swarmbreaker.Cs_Files
             
             }
 
+                if (penetration > 0)
+                {
 
-            return closestEnemy;
-        }
 
+                }
+
+
+            }
+			return closestEnemy;
+		}
     }
 }
