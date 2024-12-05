@@ -2,12 +2,12 @@
 {
 	public static class SaveData
 	{
-		public static List<EntityEnemy> entities { get; set; } = new List<EntityEnemy>();
+		public static List<EntityEnemy> enemies { get; set; } = new List<EntityEnemy>();
 		public static List<EntityPlayerCharacter> players { get; set; } = new List<EntityPlayerCharacter>();
 	
 		public static void addEnemy()
 		{
-			entities.Add(new EntityEnemy());
+			enemies.Add(new EntityEnemy());
 		}
 		public static void addPlayer(int y, int x, float speed, float statBaseHP, Weapon equippedWeapon, float statBonusAttack, float statBonusArmor, float statAttackSpeed)
 		{

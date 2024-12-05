@@ -45,9 +45,9 @@ namespace Swarmbreaker.Cs_Files
 
                 }
 
-
+                return closestEnemy;
             }
-			return closestEnemy;
-		}
+			
+		
     }
 }

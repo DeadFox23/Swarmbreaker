@@ -14,7 +14,7 @@ namespace Swarmbreaker.Pages
     {
         [BindProperty]
 
-		public required List<EntityEnemy> entities { get; set; } = new List<EntityEnemy>();
+		public required List<EntityEnemy> enemies { get; set; } = new List<EntityEnemy>();
 		public required List<EntityPlayerCharacter> players { get; set; } = new List<EntityPlayerCharacter>();
 		public int waveNumber { get; set; }
 
@@ -41,7 +41,7 @@ namespace Swarmbreaker.Pages
         public IActionResult OnGetEnemy(string baum)
         {
             string result = null;
-            foreach (var enemy in enemys)
+            foreach (var enemy in SaveData.enemies)
             {
                 //TODO BUILD JSON 
                 result = JsonConvert.SerializeObject(enemy, Formatting.Indented);
@@ -66,9 +66,9 @@ namespace Swarmbreaker.Pages
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
             for (int i = 0; i <= amountEnemy; i++) {
                 SaveData.addEnemy();
-                entities.Add(new EntityEnemy());
-                entities.ElementAt(i).y = random.Next(-100, height + 100);
-                entities.ElementAt(i).x = random.Next(-100, width + 100);
+                enemies.Add(new EntityEnemy());
+                enemies.ElementAt(i).y = random.Next(-100, height + 100);
+                enemies.ElementAt(i).x = random.Next(-100, width + 100);
             }
         }
 
