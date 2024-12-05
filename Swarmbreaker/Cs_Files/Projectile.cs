@@ -33,14 +33,13 @@ namespace Swarmbreaker.Cs_Files
                 && closestEnemy.x <= this.x + 10 
                 && closestEnemy.y >= this.y - 10 
                 && closestEnemy.y <= this.y + 10) {
-
-                if(penetration > 0) {
-
+                penetration--;
+                
             
             }
 
 
-                return closestEnemy;
+            return closestEnemy;
         }
 
     }
