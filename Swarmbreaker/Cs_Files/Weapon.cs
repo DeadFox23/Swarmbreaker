@@ -16,7 +16,7 @@
 
 
 
-        public EntityEnemy attack(EntityEnemy closestEnemy, int x, int y) {
+        public EntityEnemy[] attack(EntityEnemy[] enemyList, EntityEnemy closestEnemy, int x, int y) {
 
             TimeSpan elapsedTime = DateTime.Now - lastAttack;
 
@@ -31,10 +31,12 @@
                 {
                     for (int i = 0; i < projectiles; i++)
                     {
-                        Projectiles.Add(new((int)WeaponData.data[weaponType, 0], (int)WeaponData.data[weaponType, 1], (int)WeaponData.data[weaponType, 0], x, y));
+                        Projectiles.Add(new((int)WeaponData.data[weaponType, 0], (int)WeaponData.data[weaponType, 1], (int)WeaponData.data[weaponType, 2], ( int ) WeaponData.data[weaponType, 3], x, y));
                     }
                 }
-                
+                foreach ( var projectile in Projectiles ) {
+                    closestEnemy = projectile.move(enemyList);
+                }
 
 
                 //general weapon behaviour
@@ -44,7 +46,7 @@
                 lastAttack = DateTime.Now;
             }
 
-            return closestEnemy;
+            return enemyList;
 
         }
 

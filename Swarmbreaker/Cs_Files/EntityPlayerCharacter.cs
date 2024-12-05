@@ -63,9 +63,9 @@ namespace Swarmbreaker.Cs_Files {
         public bool death() {
             return ( this.statBaseHP <= 0 );
         }
-        public EntityEnemy attack(EntityEnemy closestEnemy) {
-            foreach ( Weapon weapon in equippedWeapons ) { closestEnemy = weapon.attack(closestEnemy, this.x, this.y); }
-            return ( closestEnemy );
+        public EntityEnemy[] attack(EntityEnemy[] enemyList, EntityEnemy closestEnemy) {
+            foreach ( Weapon weapon in equippedWeapons ) { enemyList = weapon.attack(enemyList, closestEnemy, this.x, this.y); }
+            return ( enemyList );
         }
         public void xpUp(int xp) {
             this.statXP += xp;
