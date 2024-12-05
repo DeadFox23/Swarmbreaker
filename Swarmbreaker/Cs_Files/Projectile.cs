@@ -13,7 +13,6 @@ namespace Swarmbreaker.Cs_Files
 
 
 
-
         public Projectile(int radius, int speed, int range, int x, int y)
         {
             this.radius = radius;
@@ -30,11 +29,15 @@ namespace Swarmbreaker.Cs_Files
             this.y += (int)direction.Y;
 
 
-            if (closestEnemy.x >= this.x - 10
-                && closestEnemy.x <= this.x + 10
-                && closestEnemy.y >= this.y - 10
-                && closestEnemy.y <= this.y + 10)
-            {
+
+            if (closestEnemy.x >= this.x - 10 
+                && closestEnemy.x <= this.x + 10 
+                && closestEnemy.y >= this.y - 10 
+                && closestEnemy.y <= this.y + 10) {
+                penetration--;
+                
+            
+            }
 
                 if (penetration > 0)
                 {
