@@ -40,10 +40,6 @@ html {
     position: relative;
 }
 
-/*#frame {
-    position: center
-}*/
-
 
 button {
     background-color: cornflowerblue;
@@ -131,7 +127,6 @@ button:hover{
 
     .credits-content li {
         font-size: 25px;
-        /*margin-bottom: 10px;*/
     }
     .credits-content.btn-close{
         
