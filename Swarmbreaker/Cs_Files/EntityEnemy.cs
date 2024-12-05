@@ -62,8 +62,7 @@ namespace Swarmbreaker.Cs_Files
         }
         public EntityPlayerCharacter attack(EntityPlayerCharacter target) {
             //falls target in nähe von self
-            if (target.x >= this.x-10 && target.x<=this.x+10 && target.y >= this.y - 10 && target.y <= this.y + 10)
-            {
+            if (target.x >= this.x-10 && target.x<=this.x+10 && target.y >= this.y - 10 && target.y <= this.y + 10) {
                 //damage multiplied by attack modifier
                 int damage = (int) Math.Ceiling((this.statBaseAttack * this.statBonusAttack) - target.statBonusArmor);
                 target.statBaseHP = target.statBaseHP - (damage > 0 ? damage : 0);
