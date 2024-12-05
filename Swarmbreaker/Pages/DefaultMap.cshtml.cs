@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Timers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using Swarmbreaker.Cs_Files;
 
 namespace Swarmbreaker.Pages
@@ -12,12 +13,16 @@ namespace Swarmbreaker.Pages
     public class DefaultMap : PageModel
     {
         [BindProperty]
+
 		public required List<EntityEnemy> entities { get; set; } = new List<EntityEnemy>();
 		public required List<EntityPlayerCharacter> players { get; set; } = new List<EntityPlayerCharacter>();
 		public int waveNumber { get; set; }
+
         public System.Timers.Timer? timer;
         int height = 1080;
         int width = 1920;
+
+       public DefaultMap() { }
       
         public void OnGet() {
             Main();
@@ -26,21 +31,26 @@ namespace Swarmbreaker.Pages
         [HttpGet]
         public IActionResult OnGetData(string Height,string Width)
         {
-            Console.WriteLine(Height);
-            
-            //"(?<=\\bHeight\\b\\W:\\s)[0-9]+"))
 
+            height = Convert.ToInt32(Height);
+            width = Convert.ToInt32(Width);
+                   //"(?<=\\bHeight\\b\\W:\\s)[0-9]+"))
 
 			return new JsonResult(new { height = Height, width = Width });
         }
         public IActionResult OnGetEnemy(string baum)
         {
-            Console.WriteLine(baum);
-            return new JsonResult(new { b = "bbbbb" });
+            string result = null;
+            foreach (var enemy in enemys)
+            {
+                //TODO BUILD JSON 
+                result = JsonConvert.SerializeObject(enemy, Formatting.Indented);
+            }
+            return new JsonResult(new { result });
         }
 
 
-		public void Main()
+        public void Main()
         {
             if(SaveData.players.Count == 0) {
 				players.Add(new EntityPlayerCharacter(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5));
@@ -51,7 +61,7 @@ namespace Swarmbreaker.Pages
 		}
         
         public void spawn() {
-            
+ 
             Random random = new Random();
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
             for (int i = 0; i <= amountEnemy; i++) {
@@ -61,7 +71,6 @@ namespace Swarmbreaker.Pages
                 entities.ElementAt(i).x = random.Next(-100, width + 100);
             }
         }
-
 
 
 

@@ -51,7 +51,9 @@ function generatePopUp() {
         popupContent.innerHTML = "<h2>Level up</h2>";
         //Weapons and stats
         var stats = ["Speed", "HP", "Damage", "Armor", "Attackspeed"];
+
         var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Axe"];
+
 
         for (let i = 0; i < 3; i++) {
             const newButton = document.createElement("button");
@@ -133,7 +135,7 @@ function closeCredits() {
 //});
 
 
-updateTimer();
+
 
 function enemyPosition() {
     $.ajax({
@@ -143,12 +145,10 @@ function enemyPosition() {
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
         },
-        contentType: "application/json; charset=utf-8",
-        dataType: "json",
-        data: {baum : 'hi'},
+        data: {baum : "baum"},
         success:
             function (data) {
-                const { positions, nextInterval } = data;
+                
                 console.log(data);
                 //if (data.isMatch(/positions/))
                 //updateEnemyPosition(positions);
@@ -165,8 +165,11 @@ function updateEnemyPosition(positions) {
         }
     });
 }
-let timerID = null;
-let currentInterval = setInterval(updateTimer, 2000);
+window.addEventListener('load', function () {
+    let currentInterval = setInterval(updateTimer, 2000);
+})
+
+
 function updateTimer() {
-    /*enemyPosition();*/
+    enemyPosition();
 }
