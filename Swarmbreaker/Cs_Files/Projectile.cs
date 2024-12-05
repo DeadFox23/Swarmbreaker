@@ -9,6 +9,7 @@ namespace Swarmbreaker.Cs_Files
         public int range { get; set; } = 0;
         public int x { get; set; }
         public int y { get; set; }
+        public int penetration {  get; set; }
 
 
 
@@ -28,7 +29,13 @@ namespace Swarmbreaker.Cs_Files
             this.y += (int)direction.Y;
 
 
-            if (closestEnemy.x >= this.x - 10 && closestEnemy.x <= this.x + 10 && closestEnemy.y >= this.y - 10 && closestEnemy.y <= this.y + 10) { 
+            if (closestEnemy.x >= this.x - 10 
+                && closestEnemy.x <= this.x + 10 
+                && closestEnemy.y >= this.y - 10 
+                && closestEnemy.y <= this.y + 10) {
+
+                if(penetration > 0) {
+
             
             }
 
