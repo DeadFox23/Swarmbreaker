@@ -67,7 +67,6 @@ namespace Swarmbreaker.Pages
 				enemys.ElementAt(i).x = random.Next(-100, width+100);
 
 			}
-            Console.WriteLine();
         }
 
 
