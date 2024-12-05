@@ -141,7 +141,7 @@ function closeCredits() {
 //});
 
 
-updateTimer();
+
 
 function enemyPosition() {
     $.ajax({
@@ -171,8 +171,11 @@ function updateEnemyPosition(positions) {
         }
     });
 }
+window.addEventListener('load', function () {
+    let currentInterval = setInterval(updateTimer, 2000);
+})
 
-let currentInterval = setInterval(updateTimer, 2000);
+
 function updateTimer() {
-    /*enemyPosition();*/
+    enemyPosition();
 }

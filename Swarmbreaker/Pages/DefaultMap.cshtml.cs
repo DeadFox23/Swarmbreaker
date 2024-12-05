@@ -5,6 +5,7 @@ using System.Text.RegularExpressions;
 using System.Timers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using Swarmbreaker.Cs_Files;
 
 namespace Swarmbreaker.Pages
@@ -12,12 +13,14 @@ namespace Swarmbreaker.Pages
     public class DefaultMap : PageModel
     {
         [BindProperty]
-        public required List<EntityEnemy> enemys { get; set; }
-        public required List<EntityPlayerCharacter> players { get; set; }
+        public required List<EntityEnemy> enemys { get; set; } = new List<EntityEnemy>();
+		public required List<EntityPlayerCharacter> players { get; set; }  = new List<EntityPlayerCharacter>();
         public int waveNumber { get; set; }
         public System.Timers.Timer? timer;
         int height = 1080;
         int width = 1920;
+
+       public DefaultMap() { }
       
         public void OnGet() {
             Main();
@@ -26,24 +29,24 @@ namespace Swarmbreaker.Pages
         [HttpGet]
         public IActionResult OnGetData(string Height,string Width)
         {
-            Console.WriteLine(Height);
-            
-//"(?<=\\bHeight\\b\\W:\\s)[0-9]+"))
-
-
+            height = Convert.ToInt32(Height);
+            width = Convert.ToInt32(Width);
+                   //"(?<=\\bHeight\\b\\W:\\s)[0-9]+"))
 			return new JsonResult(new { height = Height, width = Width });
         }
         public IActionResult OnGetEnemy(string baum)
         {
-            //foreach (var enemy in enemys) {
-                
-            //    enemy.move(players);
-            //}
-            return new JsonResult(new { b = "bbbbb" });
+            string result = null;
+            foreach (var enemy in enemys)
+            {
+                //TODO BUILD JSON 
+                result = JsonConvert.SerializeObject(enemy, Formatting.Indented);
+            }
+            return new JsonResult(new { result });
         }
 
 
-		public void Main()
+        public void Main()
         {
             
             waveNumber = 900;
@@ -52,28 +55,20 @@ namespace Swarmbreaker.Pages
         }
         
         public void spawn() {
-            players = new List<EntityPlayerCharacter>();
+
             //players.Add(new EntityPlayerCharacter());
-            enemys = new List<EntityEnemy>();
+
             Random random = new Random();
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
             for (int i = 0; i <= amountEnemy; i++) {
-				enemys.Add(new EntityEnemy());
-                enemys.ElementAt(i).y = random.Next(-100, height+100);
+                EntityEnemy enemy = new EntityEnemy();
+				enemys.Add(enemy);
+				enemys.ElementAt(i).y = random.Next(-100, height+100);
 				enemys.ElementAt(i).x = random.Next(-100, width+100);
 
 			}
+            Console.WriteLine();
         }
-
-
-
-
-
-
-
-
-
-
 
 
         public IActionResult OnGetAction(string action)
