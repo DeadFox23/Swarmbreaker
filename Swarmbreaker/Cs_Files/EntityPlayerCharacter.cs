@@ -49,6 +49,20 @@ namespace Swarmbreaker.Cs_Files
 
 
             }
+
+
+
+            //falls projectile keine weiteren hits machen darf wird es aus der liste entfernt
+            foreach(Weapon weapon in equippedWeapons){
+                foreach (Projectile proj in weapon.Projectiles){
+                    if (proj.penetration < 0){
+                        weapon.Projectiles.Remove(proj);
+                    }
+                }
+            }
+
+
+
             return enemies;
         }
         public bool death()
