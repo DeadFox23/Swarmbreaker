@@ -40,10 +40,6 @@ html {
     position: relative;
 }
 
-/*#frame {
-    position: center
-}*/
-
 
 button {
     background-color: cornflowerblue;
@@ -71,6 +67,7 @@ button:hover{
     justify-content: center;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.4);
+    z-index: 3;
 }
 
 .modal {
@@ -88,6 +85,7 @@ button:hover{
     right: 10px;
     font-size: 30px;
     cursor: pointer;
+    background-color: white;
 }
 
 /*LevelUp*/
@@ -97,12 +95,13 @@ button:hover{
     border-radius: 10px;
     width: 600px;
     height: 700px;
-    text-align: center;
+    text-align: center;   
 }
 
 
 /*Credits*/
 .credits-content {
+    position: fixed;
     background-image: url("/pictures/background_credits.jpg");
     background-repeat: no-repeat;
     background-size: cover;
@@ -128,16 +127,19 @@ button:hover{
 
     .credits-content li {
         font-size: 25px;
-        /*margin-bottom: 10px;*/
+    }
+    .credits-content.btn-close{
+        
     }
 
 /*Settings*/
 #settings-content {
+    position: fixed;
     background-color: white;
     padding: 20px;
     border-radius: 10px;
     width: 400px;
     height: 500px;
     text-align: left;
-    font-size:20px;
+    font-size: 20px;
 }
