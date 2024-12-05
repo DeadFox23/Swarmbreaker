@@ -170,12 +170,3 @@ let currentInterval = setInterval(updateTimer, 2000);
 function updateTimer() {
     /*enemyPosition();*/
 }
-
-
-//function generateDefaultMap(/*ids, positions*/) {
-//    for (let i = 0; i < ; i++) {
-//        const newImg = document.createElement('img');
-//        newImg.src = "/pictures/mouse_enemy.png";
-//        newImg.id = id;
-//    }
-//}
