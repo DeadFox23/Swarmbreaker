@@ -78,8 +78,8 @@
         {
             this.name           =(string)   WeaponData.data[weaponType, 3];
             this.description    =(string)   WeaponData.data[weaponType, 4];
-            this.attackSpeed    =(float)    WeaponData.data[weaponType, 5];
-            this.attackBase     =(float)    WeaponData.data[weaponType, 6];
+            this.attackSpeed    =float.Parse(WeaponData.data[weaponType, 5].ToString());
+			this.attackBase     =float.Parse(WeaponData.data[weaponType, 6].ToString());
             this.attackType     =(int)      WeaponData.data[weaponType, 7];
             this.weaponRange    =(int)      WeaponData.data[weaponType, 8];
             this.projectiles    =(int)      WeaponData.data[weaponType, 9];
