@@ -23,7 +23,6 @@ function reportWindowSize() {
     })
 }
 
-//index
 var index;
 var upgrades;
 
@@ -40,8 +39,6 @@ function randomBool()
     return Math.floor(Math.random() * 2);
 }
 
-
-
 document.addEventListener("DOMContentLoaded", generatePopUp);
 function generatePopUp() {
     const openPopupBtn = document.getElementById('openLevelUp'); // Select the open button
@@ -54,8 +51,7 @@ function generatePopUp() {
         popupContent.innerHTML = "<h2>Level up</h2>";
         //Weapons and stats
         var stats = ["Speed", "HP", "Damage", "Armor", "Attackspeed"];
-
-        var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Bow", "Axe"];
+        var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Axe"];
 
         for (let i = 0; i < 3; i++) {
             const newButton = document.createElement("button");
@@ -103,12 +99,8 @@ function action(ButtonID) {
                     $('input:hidden[name="__RequestVerificationToken"]').val());
             },
             data: { action: ButtonID },
-            success: function (response) {
-            },
-            failure: function (response) {
-
-                alert(response);
-            }
+            success: function (response) {},
+            failure: function (response) {alert(response);}
         })
 }
 

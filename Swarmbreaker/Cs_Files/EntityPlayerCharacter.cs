@@ -49,6 +49,20 @@ namespace Swarmbreaker.Cs_Files
 
 
             }
+
+
+
+            //falls projectile keine weiteren hits machen darf wird es aus der liste entfernt
+            foreach(Weapon weapon in equippedWeapons){
+                foreach (Projectile proj in weapon.Projectiles){
+                    if (proj.penetration < 0){
+                        weapon.Projectiles.Remove(proj);
+                    }
+                }
+            }
+
+
+
             return enemies;
         }
         public bool death()
@@ -66,6 +80,8 @@ namespace Swarmbreaker.Cs_Files
             {
                 this.statXP -= (int)Math.Pow(this.statLevel / 0.5, 3);
                 this.statLevel++;
+                //timer pause
+                //add LevelUp popup              
             }
         }
         public void levelDown() {
@@ -104,5 +120,21 @@ namespace Swarmbreaker.Cs_Files
         public void increaseSpeed(){
             this.speed++;
         }
-    }
+		public void increaseHP()
+		{
+			this.statBaseHP++;
+		}
+		public void increaseAttack()
+		{
+			this.statBonusAttack++;
+		}
+		public void increaseArmor()
+		{
+			this.statBonusArmor++;
+		}
+		public void increaseAttackSpeed()
+		{
+			this.statAttackSpeed++;
+		}
+	}
 }

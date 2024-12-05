@@ -13,9 +13,9 @@ namespace Swarmbreaker.Pages
     public class DefaultMap : PageModel
     {
         [BindProperty]
-        public required List<EntityEnemy> enemys { get; set; } = new List<EntityEnemy>();
-		public required List<EntityPlayerCharacter> players { get; set; }  = new List<EntityPlayerCharacter>();
-        public int waveNumber { get; set; }
+		public required List<EntityEnemy> entities { get; set; } = new List<EntityEnemy>();
+		public required List<EntityPlayerCharacter> players { get; set; } = new List<EntityPlayerCharacter>();
+		public int waveNumber { get; set; }
         public System.Timers.Timer? timer;
         int height = 1080;
         int width = 1920;
@@ -48,71 +48,77 @@ namespace Swarmbreaker.Pages
 
         public void Main()
         {
-            
-            waveNumber = 900;
-            spawn();
-            
-        }
+            if(SaveData.players.Count == 0) {
+				players.Add(new EntityPlayerCharacter(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5));
+				SaveData.addPlayer(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5);
+                waveNumber = 900;
+                spawn();
+			}
+		}
         
         public void spawn() {
-
-            //players.Add(new EntityPlayerCharacter());
-
+            
             Random random = new Random();
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
             for (int i = 0; i <= amountEnemy; i++) {
-                EntityEnemy enemy = new EntityEnemy();
-				enemys.Add(enemy);
-				enemys.ElementAt(i).y = random.Next(-100, height+100);
-				enemys.ElementAt(i).x = random.Next(-100, width+100);
-
-			}
+                SaveData.addEnemy();
+                entities.Add(new EntityEnemy());
+                entities.ElementAt(i).y = random.Next(-100, height + 100);
+                entities.ElementAt(i).x = random.Next(-100, width + 100);
+            }
         }
+
+
+
 
 
         public IActionResult OnGetAction(string action)
         {
-            Console.WriteLine(action);
+            //Kontrollausgabe
+			Console.WriteLine(action);
             switch (action)
             {
                 case "Speed":
-                    //foreach(EntityPlayerCharacter player : players)
-                    //    {
-
-                    //}
-                    //players.ElementAt(0).increaseSpeed();
+                    foreach(EntityPlayerCharacter player in SaveData.players)
+                    {player.increaseSpeed();}
                     break;
                 case "HP":
-                    //increaseHP();
-                    break;
+					foreach (EntityPlayerCharacter player in SaveData.players)
+					{player.increaseHP();}
+					break;
                 case "Damage":
-                    //increaseAttack();
-                    break;
+					foreach (EntityPlayerCharacter player in SaveData.players)
+					{player.increaseAttack();}
+					break;
                 case "Armor":
-                    //increaseArmor();
-                    break;
+					foreach (EntityPlayerCharacter player in SaveData.players)
+					{player.increaseArmor();}
+					break;
                 case "Attackspeed":
-                    //increaseAttackSpeed();
-                    break;
+					foreach (EntityPlayerCharacter player in SaveData.players)
+					{player.increaseAttackSpeed();}
+					break;
 
                 case "Slingshot":
-                    //addWeapon(\"Slingshot\", \"Slingshot\", 1.3, 15, 3, 100, 1);
-                    break;
+					foreach (EntityPlayerCharacter player in SaveData.players)
+					{ player.addWeapon(1);}	
+					break;
                 case "Tree":
-                    //addWeapon(\"Tree\", \"Tree\", 1.5, 20, 1, 40, 0);
-                    break;
+					foreach (EntityPlayerCharacter player in SaveData.players)
+					{ player.addWeapon(2); }
+					break;
                 case "Shotgun":
-                    //addWeapon(\"Shotgun\", \"Shotgun\", 1.2, 5, 3, 75, 3);
-                    break;
+					foreach (EntityPlayerCharacter player in SaveData.players)
+					{ player.addWeapon(3); }
+					break;
                 case "Knife":
-                    //addWeapon(\"Knife\", \"Knife\", 0.7, 9, 2, 25, 0);
-                    break;
-                case "Bow":
-                    //addWeapon(\"Bow\", \"Bow\", 1, 11, 3, 150, 1);
-                    break;
+					foreach (EntityPlayerCharacter player in SaveData.players)
+					{ player.addWeapon(4); }
+					break;
                 case "Axe":
-                    //addWeapon(\"Axe\", \"Axe\", 0.9, 10, 1, 30, 0);
-                    break;
+					foreach (EntityPlayerCharacter player in SaveData.players)
+					{ player.addWeapon(5); }
+					break;
             }
 
             return new JsonResult(new { });

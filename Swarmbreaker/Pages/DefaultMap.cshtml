@@ -3,17 +3,27 @@
 
 @* <img src="/pictures/betterTestPic.png" /> *@
 
-<button id="openLevelUp">Popup öffnen</button>
+<button id="openLevelUp">Popup ï¿½ffnen</button>
+
+
+
+<div>
+	@for (int i = 0; i < @Model.players.Count; i++)
+	{
+		<img src="/pictures/cat_player.png" id="player_@i" style="left:@($"{@Model.players[i].x}px"); top:@($"{@Model.players[i].y}px"); position:relative; width:60px; z-index: 1" />
+	}
+	
+	
+	@for (int i = 0; i < @Model.entities.Count; i++)
+	{
+			//<p>@item</p>
+			<img src="/pictures/mouse_enemy.png" id="enemy_@i" style="left:@($"{@Model.entities[i].x}px"); top:@($"{@Model.entities[i].y}px"); position:relative; width:60px;" />
+	}
+</div>
+
 <!-- Das Popup-Fenster -->
 <div id="levelUp" class="popup">
 	<div class="levelUp-content">
 	</div>
 </div>
 
-<div>
-@for (int i = 0; i < @Model.enemys.Count; i++)
-{
-		//<p>@item</p>
-		<img src="/pictures/mouse_enemy.png" id="@i" style="left:@($"{@Model.enemys[i].x}px"); top:@($"{@Model.enemys[i].y}px"); position:relative; width:60px;" />
-}
-</div>
