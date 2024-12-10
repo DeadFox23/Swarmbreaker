@@ -35,7 +35,7 @@
                     }
                 }
                 foreach ( var projectile in Projectiles ) {
-                    closestEnemy = projectile.move(enemyList);
+                    if(projectile!=null)enemyList = projectile.move(enemyList, closestEnemy);
                 }
 
 
