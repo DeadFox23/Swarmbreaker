@@ -29,7 +29,7 @@ namespace Swarmbreaker.Pages
             
         }
         [HttpGet]
-        public IActionResult OnGetData(string Height,string Width)
+        public IActionResult OnGetWindow(string Height,string Width)
         {
 
             height = Convert.ToInt32(Height);
@@ -40,12 +40,16 @@ namespace Swarmbreaker.Pages
         }
         public IActionResult OnGetEnemy(string baum)
         {
-            string result = null;
-            foreach (var enemy in SaveData.enemies)
+            enemies = SaveData.enemies;
+            players = SaveData.players;
+            foreach (EntityEnemy enemy in enemies)
             {
-                //TODO BUILD JSON 
-                result = JsonConvert.SerializeObject(enemy, Formatting.Indented);
+                
+                enemy.move(players);
+                
+                    
             }
+            string result = JsonConvert.SerializeObject(SaveData.enemies, Formatting.Indented);
             return new JsonResult(new { result });
         }
 
@@ -56,7 +60,7 @@ namespace Swarmbreaker.Pages
 				players.Add(new EntityPlayerCharacter(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5));
 				SaveData.addPlayer(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5);
 			}
-            waveNumber = 20;
+            waveNumber =20;
             spawn();
 		}
         
@@ -93,7 +97,7 @@ namespace Swarmbreaker.Pages
 
 
 
-        public IActionResult OnGetAction(string action)
+        public IActionResult OnGetButton(string action)
         {
             //Kontrollausgabe
 			Console.WriteLine(action);

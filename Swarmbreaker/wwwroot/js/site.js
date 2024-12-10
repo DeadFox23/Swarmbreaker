@@ -8,7 +8,7 @@ window.addEventListener('resize', reportWindowSize);
 function reportWindowSize() {
     $.ajax({
         type: "GET",
-        url: '/DefaultMap?handler=Data',
+        url: '/DefaultMap?handler=Window',
         beforeSend: function (xhr) {
             xhr.setRequestHeader("XSRF-TOKEN",
                 $('input:hidden[name="__RequestVerificationToken"]').val());
@@ -17,8 +17,8 @@ function reportWindowSize() {
         data: { Height: window.innerHeight, Width: window.innerWidth },
         success:
             function (data) {
-            console.log(data);
-            console.log("hi");
+            //console.log(data);
+            //console.log("hi");
         }
     })
 }
@@ -95,7 +95,7 @@ function btnClick_Click(ButtonID) { action(ButtonID) }
 function action(ButtonID) {
         $.ajax({
             type: "GET",
-            url: '/DefaultMap?handler=Action',
+            url: '/DefaultMap?handler=Button',
             beforeSend: function (xhr) {
                 xhr.setRequestHeader("XSRF-TOKEN",
                     $('input:hidden[name="__RequestVerificationToken"]').val());
@@ -148,23 +148,26 @@ function enemyPosition() {
         data: {baum : "baum"},
         success:
             function (data) {
-                
-                console.log(data);
-                //if (data.isMatch(/positions/))
-                //updateEnemyPosition(positions);
-                //updateTimer(nextInterval);
+                updateEnemyPosition(data);
             }
     })
 }
-function updateEnemyPosition(positions) {
-    positions.forEach(({ id, top, left }) => {
-        const img = document.getElementById(id);
-        if (img) {
-            img.style.top = `${top}px`;
-            img.style.left = `${left}px`;
-        }
-    });
+function updateEnemyPosition(data) {
+    const response = JSON.parse(data.result);
+    const enemies = response;
+    //console.log(enemies);
+    enemies.forEach(ahhhhhh)
 }
+function ahhhhhh(enemy, index) {
+    const element = document.getElementById(`enemy_${index}`);
+        if (element) {
+            element.style.left = `${enemy.x}px`;  
+            element.style.top = `${enemy.y}px`;
+            //console.log(element);
+        }
+        //console.log(enemy);
+}
+
 window.addEventListener('load', function () {
     let currentInterval = setInterval(updateTimer, 2000);
 })

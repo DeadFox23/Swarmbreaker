@@ -6,15 +6,15 @@ namespace Swarmbreaker.Cs_Files
     public class EntityEnemy : IEntity
     {
 
-        public int y { get; set; } = 0;
-        public int x { get; set; } = 0;
-        public float speed { get; set; } = 0;
-        public float statBaseHP { get; set; } = 0;
-        public float statBaseAttack { get; set; } = 0;
-        public float statBonusAttack { get; set; } = 0;
-        public float statBonusArmor { get; set; } = 0;
-        public int xpDrop { get; } = 0;
-        public Boolean isBoss { get; } = false;
+        public int y { get; set; }
+        public int x { get; set; }
+        public float speed { get; set; }
+        public float statBaseHP { get; set; }
+        public float statBaseAttack { get; set; }
+        public float statBonusAttack { get; set; }
+        public float statBonusArmor { get; set; }
+        public int xpDrop { get; }
+        public Boolean isBoss { get; }
 
 		public EntityEnemy(int y, int x, float speed, float statBaseHP, float statBaseAttack, float statBonusAttack, float statBonusArmor, int xpDrop, Boolean isBoss)
 		{
