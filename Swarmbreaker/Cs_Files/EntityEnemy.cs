@@ -16,7 +16,18 @@ namespace Swarmbreaker.Cs_Files
         public int xpDrop { get; } = 0;
         public Boolean isBoss { get; } = false;
 
-        public EntityEnemy(int y, int x, float speed, float statBaseHP, float statBaseAttack, float statBonusAttack, float statBonusArmor, int xpDrop, Boolean isBoss) { }
+		public EntityEnemy(int y, int x, float speed, float statBaseHP, float statBaseAttack, float statBonusAttack, float statBonusArmor, int xpDrop, Boolean isBoss)
+		{
+			this.y = y;
+			this.x = x;
+			this.speed = speed;
+			this.statBaseHP = statBaseHP;
+			this.statBaseAttack = statBaseAttack;
+			this.statBonusAttack = statBonusAttack;
+			this.statBonusArmor = statBonusArmor;
+			this.xpDrop = xpDrop;
+            this.isBoss = isBoss;
+		}
 
         public void move(List<EntityPlayerCharacter> players) {
             if (players == null || players.Count == 0)
@@ -63,7 +74,7 @@ namespace Swarmbreaker.Cs_Files
             return(this.statBaseHP <= 0);
         }
         public EntityPlayerCharacter attack(EntityPlayerCharacter target) {
-            //falls target in nähe von self
+            //falls target in nï¿½he von self
             if (target.x >= this.x-10 && target.x<=this.x+10 && target.y >= this.y - 10 && target.y <= this.y + 10) {
                 //damage multiplied by attack modifier
                 int damage = (int) Math.Ceiling((this.statBaseAttack * this.statBonusAttack) - target.statBonusArmor);
