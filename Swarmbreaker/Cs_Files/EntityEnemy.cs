@@ -16,7 +16,7 @@ namespace Swarmbreaker.Cs_Files
         public int xpDrop { get; } = 0;
         public Boolean isBoss { get; } = false;
 
-        public EntityEnemy() { }
+        public EntityEnemy(int y, int x, float speed, float statBaseHP, float statBaseAttack, float statBonusAttack, float statBonusArmor, int xpDrop, Boolean isBoss) { }
 
         public void move(List<EntityPlayerCharacter> players) {
             if (players == null || players.Count == 0)
