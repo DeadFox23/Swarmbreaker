@@ -38,9 +38,7 @@ namespace Swarmbreaker.Cs_Files {
                     }
                 }
 
-
-                if ( closestEnemy != null )
-                    enemies[enemies.IndexOf(closestEnemy)] = this.attack(enemies[enemies.IndexOf(closestEnemy)]);
+                enemies = this.attack(enemies, closestEnemy!);
 
 
             }
@@ -63,7 +61,7 @@ namespace Swarmbreaker.Cs_Files {
         public bool death() {
             return ( this.statBaseHP <= 0 );
         }
-        public EntityEnemy[] attack(EntityEnemy[] enemyList, EntityEnemy closestEnemy) {
+        public List<EntityEnemy> attack(List<EntityEnemy> enemyList, EntityEnemy closestEnemy) {
             foreach ( Weapon weapon in equippedWeapons ) { enemyList = weapon.attack(enemyList, closestEnemy, this.x, this.y); }
             return ( enemyList );
         }

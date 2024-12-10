@@ -16,7 +16,7 @@
 
 
 
-        public EntityEnemy[] attack(EntityEnemy[] enemyList, EntityEnemy closestEnemy, int x, int y) {
+        public List<EntityEnemy> attack(List<EntityEnemy> enemyList, EntityEnemy closestEnemy, int x, int y) {
 
             TimeSpan elapsedTime = DateTime.Now - lastAttack;
 
@@ -31,7 +31,7 @@
                 {
                     for (int i = 0; i < projectiles; i++)
                     {
-                        Projectiles.Add(new((int)WeaponData.data[weaponType, 0], (int)WeaponData.data[weaponType, 1], (int)WeaponData.data[weaponType, 2], ( int ) WeaponData.data[weaponType, 3], x, y));
+                        Projectiles.Add(new((int)WeaponData.data[weaponType, 0], (int)WeaponData.data[weaponType, 1], (int)WeaponData.data[weaponType, 2], ( int ) WeaponData.data[weaponType, 3], ( int ) WeaponData.data[weaponType, 4], x, y));
                     }
                 }
                 foreach ( var projectile in Projectiles ) {
@@ -78,13 +78,13 @@
 
         public Weapon(int weaponType)
         {
-            this.name           =(string)   WeaponData.data[weaponType, 3];
-            this.description    =(string)   WeaponData.data[weaponType, 4];
-            this.attackSpeed    =float.Parse(WeaponData.data[weaponType, 5].ToString());
-			this.attackBase     =float.Parse(WeaponData.data[weaponType, 6].ToString());
-            this.attackType     =(int)      WeaponData.data[weaponType, 7];
-            this.weaponRange    =(int)      WeaponData.data[weaponType, 8];
-            this.projectiles    =(int)      WeaponData.data[weaponType, 9];
+            this.name           =(string)   WeaponData.data[weaponType, 5];
+            this.description    =(string)   WeaponData.data[weaponType, 6];
+            this.attackSpeed    =float.Parse(WeaponData.data[weaponType, 7].ToString());
+			this.attackBase     =float.Parse(WeaponData.data[weaponType, 8].ToString());
+            this.attackType     =(int)      WeaponData.data[weaponType, 9];
+            this.weaponRange    =(int)      WeaponData.data[weaponType, 10];
+            this.projectiles    =(int)      WeaponData.data[weaponType, 11];
         }
 
     }

@@ -15,7 +15,7 @@ namespace Swarmbreaker.Cs_Files
 
 
 
-        public Projectile(int radius, int speed, int range, int damage, int x, int y)
+        public Projectile(int radius, int speed, int range, int damage, int penetration, int x, int y)
         {
             this.radius = radius;
             this.speed = speed;
@@ -25,7 +25,7 @@ namespace Swarmbreaker.Cs_Files
             this.y = y;
         }
 
-        public EntityEnemy[] move(EntityEnemy[] enemyList, EntityEnemy closestEnemy)
+        public List<EntityEnemy> move(List<EntityEnemy> enemyList, EntityEnemy closestEnemy)
         {
             direction *= speed;
             this.x += (int)direction.X;
