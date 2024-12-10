@@ -65,10 +65,19 @@ namespace Swarmbreaker.Pages
             Random random = new Random();
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
             for (int i = 0; i <= amountEnemy; i++) {
-                SaveData.addEnemy();
-                enemies.Add(new EntityEnemy());
-                enemies.ElementAt(i).y = random.Next(-100, height + 100);
-                enemies.ElementAt(i).x = random.Next(-100, width + 100);
+				int y = random.Next(-100, height + 100);
+				int x = random.Next(-100, width + 100);
+                float speed = 2;
+				float statBaseHP = 50;
+				float statBaseAttack = 5;
+				float statBonusAttack = 0;
+				float statBonusArmor = 0;
+                int xpDrop = 5;
+                bool isBoss = false;
+
+
+                SaveData.addEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss);
+                enemies.Add(new EntityEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss));
             }
         }
 
