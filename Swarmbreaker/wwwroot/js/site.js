@@ -174,11 +174,11 @@ window.addEventListener('load', function () {
 
 
 function updateTimer() {
-   /* enemyPosition();*/
+    enemyPosition();
 }
 
 
-window.addEventListener('keydown', function (e) {console.log(e.key); playerPosition(e.key)});
+window.addEventListener('keydown', function (e) {playerPosition(e.key)});
 
 function playerPosition(key) {
     $.ajax({
@@ -192,7 +192,6 @@ function playerPosition(key) {
         success:
             function (data) {
                 updatePlayerPosition(data);
-                console.log(key);
             }
     })
 }

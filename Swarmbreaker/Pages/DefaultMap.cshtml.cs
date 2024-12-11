@@ -55,7 +55,6 @@ namespace Swarmbreaker.Pages
 
         public IActionResult OnGetPlayer(char key)
         {
-			Console.WriteLine(key);
 			Vector2 pos = new Vector2(0,0);
 			switch (key)
 			{               
@@ -81,12 +80,6 @@ namespace Swarmbreaker.Pages
             string result = JsonConvert.SerializeObject(SaveData.players, Formatting.Indented);
             return new JsonResult(new { result });
         }
-
-
-
-
-
-
 
 
         public void Main()
