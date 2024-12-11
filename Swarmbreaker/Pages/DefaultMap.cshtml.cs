@@ -78,10 +78,11 @@ namespace Swarmbreaker.Pages
 
 			Random random = new Random();
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
+
             for (int i = 0; i <= amountEnemy; i++) {
                 y = random.Next(-100, height + 100);
 				x = random.Next(-100, width + 100);
-                speed = 2;
+                speed = 20;
                 statBaseHP = 20;
                 statBaseAttack = 2; 
                 statBonusAttack = 2;

@@ -156,20 +156,19 @@ function updateEnemyPosition(data) {
     const response = JSON.parse(data.result);
     const enemies = response;
     //console.log(enemies);
-    enemies.forEach(ahhhhhh)
-}
-function ahhhhhh(enemy, index) {
-    const element = document.getElementById(`enemy_${index}`);
-        if (element) {
-            element.style.left = `${enemy.x}px`;  
-            element.style.top = `${enemy.y}px`;
-            //console.log(element);
+    for(let i = 0; i <= enemies.length; i++) {
+        const element = document.getElementById(`enemy_${i}`);
+                if (element) {
+                    element.style.left = `${enemies[i].x}px`;  
+                    element.style.top = `${enemies[i].y}px`;
+                    //console.log(element);
         }
         //console.log(enemy);
+    }
 }
 
 window.addEventListener('load', function () {
-    let currentInterval = setInterval(updateTimer, 2000);
+    let currentInterval = setInterval(updateTimer, 100);
 })
 
 
