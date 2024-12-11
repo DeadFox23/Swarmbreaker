@@ -51,22 +51,23 @@ function generatePopUp() {
         popupContent.innerHTML = "<h2>Level up</h2>";
         //Weapons and stats
         var stats = ["Speed", "HP", "Damage", "Armor", "Attackspeed"];
-
         var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Axe"];
 
-
+        
         for (let i = 0; i < 3; i++) {
+            //generate button
             const newButton = document.createElement("button");
             newButton.classList.add("closePopupBtn");
             newButton.setAttribute("data-close", "true");
 
-
+            //add a weapon to button
             if (randomBool() == 1) {
                 index = randomIndex(2, stats, weapons);
                 newButton.textContent = weapons[index];
                 newButton.id = weapons[index];
                 weapons.splice(index, 1);
             }
+            //add a stat to button
             else {
                 index = randomIndex(1, stats, weapons);
                 newButton.textContent = stats[index];
