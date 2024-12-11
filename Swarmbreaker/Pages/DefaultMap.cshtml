@@ -10,14 +10,14 @@
 <div>
 	@for (int i = 0; i < @Model.players.Count; i++)
 	{
-		<img src="/pictures/cat_player.png" id="player_@i" style="left:@($"{@Model.players[i].x}px"); top:@($"{@Model.players[i].y}px"); position:relative; width:60px; z-index: 1" />
+		<img src="/pictures/cat_player.png" id="player_@i" style="left:@($"{@Model.players[i].x}px"); top:@($"{@Model.players[i].y}px"); position:absolute; width:60px; z-index: 1" />
 	}
 	
 	
 	@for (int i = 0; i < @Model.enemies.Count; i++)
 	{
 			//<p>@item</p>
-			<img src="/pictures/mouse_enemy.png" id="enemy_@i" style="left:@($"{@Model.enemies[i].x}px"); top:@($"{@Model.enemies[i].y}px"); position:relative; width:60px;" />
+			<img src="/pictures/mouse_enemy.png" id="enemy_@i" style="left:@($"{@Model.enemies[i].x}px"); top:@($"{@Model.enemies[i].y}px"); position:absolute; width:60px;" />
 	}
 </div>
 
