@@ -7,7 +7,7 @@
 	
 		public static void addEnemy(int y, int x, float speed, float statBaseHP, float statBaseAttack, float statBonusAttack, float statBonusArmor, int xpDrop, Boolean isBoss)
 		{
-			enemies.Add(new EntityEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss));
+			enemies.Add(new EntityEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss, 1));
 		}
 		public static void addPlayer(int y, int x, float speed, float statBaseHP, Weapon equippedWeapon, float statBonusAttack, float statBonusArmor, float statAttackSpeed)
 		{
