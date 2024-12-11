@@ -49,22 +49,23 @@ function generatePopUp() {
         popupContent.innerHTML = "<h2>Level up</h2>";
         //Weapons and stats
         var stats = ["Speed", "HP", "Damage", "Armor", "Attackspeed"];
-
         var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Axe"];
 
-
+        
         for (let i = 0; i < 3; i++) {
+            //generate button
             const newButton = document.createElement("button");
             newButton.classList.add("closePopupBtn");
             newButton.setAttribute("data-close", "true");
 
-
+            //add a weapon to button
             if (randomBool() == 1) {
                 index = randomIndex(2, stats, weapons);
                 newButton.textContent = weapons[index];
                 newButton.id = weapons[index];
                 weapons.splice(index, 1);
             }
+            //add a stat to button
             else {
                 index = randomIndex(1, stats, weapons);
                 newButton.textContent = stats[index];
@@ -174,4 +175,35 @@ function updateTimer() {
     enemyPosition();
 }
 
+window.addEventListener('keydown', function (e) {playerPosition(e.key)});
+
+function playerPosition(key) {
+    $.ajax({
+        type: "GET",
+        url: '/DefaultMap?handler=Player',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+                $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+        data: { key: key },
+        success:
+            function (data) {
+                updatePlayerPosition(data);
+            }
+    })
+}
+
+
+
+function updatePlayerPosition(data) {
+    const response = JSON.parse(data.result);
+    const players = response;
+    for (let i = 0; i <= players.length; i++) {
+        const element = document.getElementById(`player_${i}`);
+        if (element) {
+            element.style.left = `${players[i].x}px`;
+            element.style.top = `${players[i].y}px`;
+        }
+    }
+}
 

@@ -13,6 +13,8 @@
         public int projectiles { get; set; }
         public DateTime lastAttack { get; set; } = DateTime.Now;
         public List<Projectile> Projectiles { get; set; } = [];
+        public bool weaponShowing { get; set; } = false;
+        public int weaponDegree { get; set; } = 0;
 
 
 
@@ -21,11 +23,6 @@
             TimeSpan elapsedTime = DateTime.Now - lastAttack;
 
             if (elapsedTime.TotalMilliseconds >= attackSpeed){
-
-
-                //detect closest enemy
-
-
 
                 if (attackType > 0)
                 {
@@ -40,6 +37,8 @@
 
 
                 //general weapon behaviour
+                
+
 
 
 
@@ -85,6 +84,8 @@
             this.attackType     =(int)      WeaponData.data[weaponType, 9];
             this.weaponRange    =(int)      WeaponData.data[weaponType, 10];
             this.projectiles    =(int)      WeaponData.data[weaponType, 11];
+            if ( weaponType == 0 )
+                this.weaponDegree = -45;
         }
 
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Security.Principal;
@@ -7,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using Swarmbreaker.Cs_Files;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Swarmbreaker.Pages
 {
@@ -45,6 +47,34 @@ namespace Swarmbreaker.Pages
                 enemy.move(SaveData.players);     
             }
             string result = JsonConvert.SerializeObject(SaveData.enemies, Formatting.Indented);
+            return new JsonResult(new { result });
+        }
+
+        public IActionResult OnGetPlayer(char key)
+        {
+			Vector2 pos = new Vector2(0,0);
+			switch (key)
+			{               
+				case 'a':
+                    pos = new Vector2(-1,0);
+					break;
+				case 'd':
+					pos = new Vector2(1, 0);
+					break;
+				case 'w':
+					pos = new Vector2(0, -1);
+					break;
+				case 's':
+					pos = new Vector2(0, 1);
+					break;
+                default:
+                    break;
+			}
+			foreach (EntityPlayerCharacter player in SaveData.players)
+            {
+                player.move(pos, width, height, SaveData.enemies);
+            }
+            string result = JsonConvert.SerializeObject(SaveData.players, Formatting.Indented);
             return new JsonResult(new { result });
         }
 
@@ -87,8 +117,10 @@ namespace Swarmbreaker.Pages
                 id = i;
                 isBoss = false;
 				
-				SaveData.addEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, id, isBoss);
-				enemies.Add(new EntityEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, id, isBoss));
+
+				SaveData.addEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss, id);
+				enemies.Add(new EntityEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss, id));
+
 			}
         }
 
