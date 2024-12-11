@@ -11,7 +11,6 @@ namespace Swarmbreaker.Cs_Files {
         public float statBonusAttack { get; set; }
         public float statBonusArmor { get; set; }
         public int xpDrop { get; }
-        public int id { get; set; }
         public Boolean isBoss { get; }
         public int enemyID { get; set; }
 
