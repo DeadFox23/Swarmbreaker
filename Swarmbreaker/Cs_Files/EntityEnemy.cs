@@ -14,9 +14,10 @@ namespace Swarmbreaker.Cs_Files
         public float statBonusAttack { get; set; }
         public float statBonusArmor { get; set; }
         public int xpDrop { get; }
+        public int id { get; set; }
         public Boolean isBoss { get; }
 
-		public EntityEnemy(int y, int x, float speed, float statBaseHP, float statBaseAttack, float statBonusAttack, float statBonusArmor, int xpDrop, Boolean isBoss)
+		public EntityEnemy(int y, int x, float speed, float statBaseHP, float statBaseAttack, float statBonusAttack, float statBonusArmor, int xpDrop, int id, Boolean isBoss)
 		{
 			this.y = y;
 			this.x = x;
@@ -26,6 +27,7 @@ namespace Swarmbreaker.Cs_Files
 			this.statBonusAttack = statBonusAttack;
 			this.statBonusArmor = statBonusArmor;
 			this.xpDrop = xpDrop;
+            this.id = id;
             this.isBoss = isBoss;
 		}
 

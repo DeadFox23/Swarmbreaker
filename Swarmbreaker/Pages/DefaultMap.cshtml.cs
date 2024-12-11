@@ -19,7 +19,7 @@ namespace Swarmbreaker.Pages
 		public int waveNumber { get; set; }
 
         public System.Timers.Timer? timer;
-        int height = 1080;
+        int height = 920;
         int width = 1920;
 
        public DefaultMap() { }
@@ -40,14 +40,9 @@ namespace Swarmbreaker.Pages
         }
         public IActionResult OnGetEnemy(string baum)
         {
-            enemies = SaveData.enemies;
-            players = SaveData.players;
-            foreach (EntityEnemy enemy in enemies)
+            foreach (EntityEnemy enemy in SaveData.enemies)
             {
-                
-                enemy.move(players);
-                
-                    
+                enemy.move(SaveData.players);     
             }
             string result = JsonConvert.SerializeObject(SaveData.enemies, Formatting.Indented);
             return new JsonResult(new { result });
@@ -74,24 +69,26 @@ namespace Swarmbreaker.Pages
             float statBonusAttack;
             float statBonusArmor;
             int xpDrop;
+            int id;
             Boolean isBoss;
 
 			Random random = new Random();
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
 
             for (int i = 0; i <= amountEnemy; i++) {
-                y = random.Next(-100, height + 100);
-				x = random.Next(-100, width + 100);
-                speed = 20;
+                y = random.Next(0, height);
+				x = random.Next(0, width);
+                speed = 2;
                 statBaseHP = 20;
                 statBaseAttack = 2; 
                 statBonusAttack = 2;
                 statBonusArmor = 0;
                 xpDrop = 5;
+                id = i;
                 isBoss = false;
 				
-				SaveData.addEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss);
-				enemies.Add(new EntityEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss));
+				SaveData.addEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, id, isBoss);
+				enemies.Add(new EntityEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, id, isBoss));
 			}
         }
 

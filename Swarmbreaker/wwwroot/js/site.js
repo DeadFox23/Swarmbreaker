@@ -17,8 +17,6 @@ function reportWindowSize() {
         data: { Height: window.innerHeight, Width: window.innerWidth },
         success:
             function (data) {
-            //console.log(data);
-            //console.log("hi");
         }
     })
 }
@@ -168,10 +166,12 @@ function updateEnemyPosition(data) {
 }
 
 window.addEventListener('load', function () {
-    let currentInterval = setInterval(updateTimer, 100);
+    let currentInterval = setInterval(updateTimer, 50);
 })
 
 
 function updateTimer() {
     enemyPosition();
 }
+
+
