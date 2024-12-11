@@ -29,7 +29,7 @@ namespace Swarmbreaker.Pages
             
         }
         [HttpGet]
-        public IActionResult OnGetData(string Height,string Width)
+        public IActionResult OnGetWindow(string Height,string Width)
         {
 
             height = Convert.ToInt32(Height);
@@ -40,12 +40,16 @@ namespace Swarmbreaker.Pages
         }
         public IActionResult OnGetEnemy(string baum)
         {
-            string result = null;
-            foreach (var enemy in SaveData.enemies)
+            enemies = SaveData.enemies;
+            players = SaveData.players;
+            foreach (EntityEnemy enemy in enemies)
             {
-                //TODO BUILD JSON 
-                result = JsonConvert.SerializeObject(enemy, Formatting.Indented);
+                
+                enemy.move(players);
+                
+                    
             }
+            string result = JsonConvert.SerializeObject(SaveData.enemies, Formatting.Indented);
             return new JsonResult(new { result });
         }
 
@@ -55,36 +59,46 @@ namespace Swarmbreaker.Pages
             if(SaveData.players.Count == 0) {
 				players.Add(new EntityPlayerCharacter(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5));
 				SaveData.addPlayer(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5);
-                waveNumber = 900;
-                spawn();
 			}
+            waveNumber =20;
+            spawn();
 		}
         
         public void spawn() {
- 
-            Random random = new Random();
+
+            int y;
+            int x;
+            float speed;
+            float statBaseHP;
+            float statBaseAttack;
+            float statBonusAttack;
+            float statBonusArmor;
+            int xpDrop;
+            Boolean isBoss;
+
+			Random random = new Random();
             int amountEnemy = random.Next(waveNumber, waveNumber+2);
+
             for (int i = 0; i <= amountEnemy; i++) {
-				int y = random.Next(-100, height + 100);
-				int x = random.Next(-100, width + 100);
-                float speed = 2;
-				float statBaseHP = 50;
-				float statBaseAttack = 5;
-				float statBonusAttack = 0;
-				float statBonusArmor = 0;
-                int xpDrop = 5;
-                bool isBoss = false;
-
-
-                SaveData.addEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss);
-                enemies.Add(new EntityEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss));
-            }
+                y = random.Next(-100, height + 100);
+				x = random.Next(-100, width + 100);
+                speed = 20;
+                statBaseHP = 20;
+                statBaseAttack = 2; 
+                statBonusAttack = 2;
+                statBonusArmor = 0;
+                xpDrop = 5;
+                isBoss = false;
+				
+				SaveData.addEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss);
+				enemies.Add(new EntityEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss));
+			}
         }
 
 
 
 
-        public IActionResult OnGetAction(string action)
+        public IActionResult OnGetButton(string action)
         {
             //Kontrollausgabe
 			Console.WriteLine(action);
