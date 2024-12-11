@@ -38,7 +38,7 @@ namespace Swarmbreaker.Cs_Files {
                     }
                 }
 
-                enemies = this.attack(enemies, closestEnemy!);
+                //enemies = this.attack(enemies, closestEnemy!);
 
 
             }
@@ -46,13 +46,13 @@ namespace Swarmbreaker.Cs_Files {
 
 
             //falls projectile keine weiteren hits machen darf wird es aus der liste entfernt
-            foreach ( Weapon weapon in equippedWeapons ) {
-                foreach ( Projectile proj in weapon.Projectiles ) {
-                    if ( proj.penetration < 0 ) {
-                        weapon.Projectiles.Remove(proj);
-                    }
-                }
-            }
+            //foreach ( Weapon weapon in equippedWeapons ) {
+            //    foreach ( Projectile proj in weapon.Projectiles ) {
+            //        if ( proj.penetration < 0 ) {
+            //            weapon.Projectiles.Remove(proj);
+            //        }
+            //    }
+            //}
 
 
 

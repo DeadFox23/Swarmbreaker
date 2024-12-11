@@ -12,7 +12,7 @@
         public int weaponRange { get; set; }
         public int projectiles { get; set; }
         public DateTime lastAttack { get; set; } = DateTime.Now;
-        public List<Projectile> Projectiles { get; set; } = [];
+        public List<Projectile> Projectiles { get; set; } = new List<Projectile>();
 
 
 

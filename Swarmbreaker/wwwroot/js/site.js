@@ -174,5 +174,39 @@ window.addEventListener('load', function () {
 
 
 function updateTimer() {
-    enemyPosition();
+   /* enemyPosition();*/
+}
+
+
+window.addEventListener('keydown', function (e) {console.log(e.key); playerPosition(e.key)});
+
+function playerPosition(key) {
+    $.ajax({
+        type: "GET",
+        url: '/DefaultMap?handler=Player',
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader("XSRF-TOKEN",
+                $('input:hidden[name="__RequestVerificationToken"]').val());
+        },
+        data: { key: key },
+        success:
+            function (data) {
+                updatePlayerPosition(data);
+                console.log(key);
+            }
+    })
+}
+
+
+
+function updatePlayerPosition(data) {
+    const response = JSON.parse(data.result);
+    const players = response;
+    for (let i = 0; i <= players.length; i++) {
+        const element = document.getElementById(`player_${i}`);
+        if (element) {
+            element.style.left = `${players[i].x}px`;
+            element.style.top = `${players[i].y}px`;
+        }
+    }
 }
