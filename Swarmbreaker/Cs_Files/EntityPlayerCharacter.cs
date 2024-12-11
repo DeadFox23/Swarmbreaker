@@ -11,14 +11,27 @@ namespace Swarmbreaker.Cs_Files {
         public float statBonusAttack { get; set; } = 0;
         public float statBonusArmor { get; set; } = 0;
         public float statAttackSpeed { get; set; } = 0;
+        public DateTime lastTime_iFrame { get; set; } = DateTime.Now;
 
         public int statXP = 0;
         public int statLevel = 1;
 
         public List<EntityEnemy>? move(Vector2 direction, int sizeX, int sizeY, List<EntityEnemy> enemies) {
-            this.x = ( x + ( int ) ( direction.X * speed ) > sizeX ? sizeX : ( int ) ( direction.X * speed ) );
-            this.y = ( y + ( int ) ( direction.Y * speed ) > sizeY ? sizeY : ( int ) ( direction.Y * speed ) );
+            //fieldsize = sizeX * sizeY / border control
+            if ( x + ( direction.X * speed ) > sizeX )
+                this.x = sizeX;
+            else if ( x + ( direction.X * speed ) < 0 )
+                this.x = 0;
+            else
+                this.x += ( int ) ( direction.X * speed );
 
+
+            if ( y + ( direction.Y * speed ) > sizeY )
+                this.y = sizeY;
+            else if ( y + ( direction.Y * speed ) < 0 )
+                this.y = 0;
+            else
+                this.y += ( int ) ( direction.Y * speed );
 
 
 
@@ -48,7 +61,7 @@ namespace Swarmbreaker.Cs_Files {
             //falls projectile keine weiteren hits machen darf wird es aus der liste entfernt
             foreach ( Weapon weapon in equippedWeapons ) {
                 foreach ( Projectile proj in weapon.Projectiles ) {
-                    if ( proj.penetration < 0 ) {
+                    if ( proj.penetration < 0 || proj.distanceTraveled>=proj.range) {
                         weapon.Projectiles.Remove(proj);
                     }
                 }
