@@ -1,3 +1,6 @@
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.JSInterop;
+using Swarmbreaker.Pages;
 using System.Numerics;
 
 namespace Swarmbreaker.Cs_Files {
@@ -15,6 +18,7 @@ namespace Swarmbreaker.Cs_Files {
 
         public int statXP = 0;
         public int statLevel = 1;
+        public Boolean levelUp { get; set; } = false;
 
         public List<EntityEnemy>? move(Vector2 direction, int sizeX, int sizeY, List<EntityEnemy> enemies) {
             //fieldsize = sizeX * sizeY / border control
@@ -83,14 +87,13 @@ namespace Swarmbreaker.Cs_Files {
             if ( this.statXP > Math.Pow(this.statLevel / 0.5, 3) ) {
                 this.statXP -= ( int ) Math.Pow(this.statLevel / 0.5, 3);
                 this.statLevel++;
-                //timer pause
-                //add LevelUp popup              
-            }
+                this.levelUp = true;
+			}
         }
         public void levelDown() {
             throw new NotImplementedException();
         }
-        public EntityPlayerCharacter(int y, int x, float speed, float statBaseHP, Weapon equippedWeapon, float statBonusAttack, float statBonusArmor, float statAttackSpeed) {
+        public EntityPlayerCharacter(int y, int x, float speed, float statBaseHP, Weapon equippedWeapon, float statBonusAttack, float statBonusArmor, float statAttackSpeed, Boolean levelUp) {
             this.y = y;
             this.x = x;
             this.speed = speed;
@@ -100,6 +103,7 @@ namespace Swarmbreaker.Cs_Files {
             this.statBonusAttack = statBonusAttack;
             this.statBonusArmor = statBonusArmor;
             this.statAttackSpeed = statAttackSpeed;
+            this.levelUp = levelUp;
         }
 
         public void addWeapon(int weaponType) {

@@ -43,10 +43,16 @@ namespace Swarmbreaker.Pages
         public IActionResult OnGetEnemy(string baum)
         {
             foreach (EntityEnemy enemy in SaveData.enemies)
-            {
-                enemy.move(SaveData.players);     
-            }
-            string result = JsonConvert.SerializeObject(SaveData.enemies, Formatting.Indented);
+			{
+                //enemy.statBaseHP -= 1;
+                if (enemy.death())
+				{
+					enemies.Remove(enemy);
+				}
+				enemy.move(SaveData.players);
+			}
+
+			string result = JsonConvert.SerializeObject(SaveData.enemies, Formatting.Indented);
             return new JsonResult(new { result });
         }
 
@@ -70,20 +76,32 @@ namespace Swarmbreaker.Pages
                 default:
                     break;
 			}
-			foreach (EntityPlayerCharacter player in SaveData.players)
-            {
-                player.move(pos, width, height, SaveData.enemies);
-            }
-            string result = JsonConvert.SerializeObject(SaveData.players, Formatting.Indented);
-            return new JsonResult(new { result });
+				foreach (EntityPlayerCharacter player in SaveData.players)
+				{
+                //player.xpUp(5);
+                //player.statBaseHP -= 1;
+                if (player.death())
+				    {
+					    players.Remove(player);
+					    break;
+				    }
+				    player.move(pos, width, height, SaveData.enemies);
+                }
+
+			string result = JsonConvert.SerializeObject(SaveData.players, Formatting.Indented);
+			if (SaveData.players[0].levelUp == true)
+			{
+				SaveData.players[0].levelUp = false;
+			}
+			return new JsonResult(new { result });
         }
 
 
         public void Main()
         {
             if(SaveData.players.Count == 0) {
-				players.Add(new EntityPlayerCharacter(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5));
-				SaveData.addPlayer(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5);
+				players.Add(new EntityPlayerCharacter(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5, false));
+				SaveData.addPlayer(height / 2, width / 2, 5, 50, new Weapon(1), 0, 0, 5, false);
 			}
             waveNumber =20;
             spawn();
@@ -115,8 +133,7 @@ namespace Swarmbreaker.Pages
                 statBonusArmor = 0;
                 xpDrop = 5;
                 id = i;
-                isBoss = false;
-				
+                isBoss = false;				
 
 				SaveData.addEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss, id);
 				enemies.Add(new EntityEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss, id));
