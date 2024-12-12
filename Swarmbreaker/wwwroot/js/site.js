@@ -167,12 +167,16 @@ function updateEnemyPosition(data) {
 }
 
 window.addEventListener('load', function () {
-    let currentInterval = setInterval(updateTimer, 50);
+    let currentInterval = setInterval(updateTimer, 100);
 })
 
-
-function updateTimer() {
-    enemyPosition();
+let timerRunning = true;
+function runtimer() {
+    if (timerRunning === true) {
+        function updateTimer() {
+            enemyPosition();
+        }
+    }
 }
 
 window.addEventListener('keydown', function (e) {playerPosition(e.key)});
