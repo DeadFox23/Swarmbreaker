@@ -12,9 +12,9 @@ namespace Swarmbreaker.Cs_Files {
         public float statBonusArmor { get; set; } = 0;
         public float statAttackSpeed { get; set; } = 0;
         public DateTime lastTime_iFrame { get; set; } = DateTime.Now;
-        public Object[,] shownWeapon {  get; set; } 
-        public int statXP = 0;
-        public int statLevel = 1;
+        public int[,] shownWeapon {  get; set; } 
+        public int statXP { get; set; } = 0;
+        public int statLevel { get; set; } = 1;
 
         public List<EntityEnemy>? move(Vector2 direction, int sizeX, int sizeY, List<EntityEnemy> enemies) {
             //fieldsize = sizeX * sizeY / border control
@@ -108,7 +108,7 @@ namespace Swarmbreaker.Cs_Files {
             this.statBonusAttack = statBonusAttack;
             this.statBonusArmor = statBonusArmor;
             this.statAttackSpeed = statAttackSpeed;
-            this.shownWeapon = new Object[6, 2];
+            this.shownWeapon = new int[6, 2];
         }
 
         public void addWeapon(int weaponType) {
