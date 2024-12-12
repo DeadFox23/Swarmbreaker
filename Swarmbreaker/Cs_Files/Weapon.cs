@@ -13,6 +13,7 @@
         public List<Projectile> Projectiles { get; set; } = new List<Projectile>();
         public bool weaponShowing { get; set; } = false;
         public int weaponDegree { get; set; } = 0;
+        public Object[,] hitEnemies { get; set; }  
 
 
 
@@ -98,6 +99,9 @@
             this.projectiles = ( int ) WeaponData.data[weaponType, 11];
             if ( weaponType == 0 )
                 this.weaponDegree = -45;
+            this.hitEnemies = new Object[1,2];
+            this.hitEnemies[0,0]=new List<int>();
+            this.hitEnemies[0,1]=new List<int>();
         }
 
     }
