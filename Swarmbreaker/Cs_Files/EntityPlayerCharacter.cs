@@ -16,22 +16,23 @@ namespace Swarmbreaker.Cs_Files {
         public float statAttackSpeed { get; set; } = 0;
         public DateTime lastTime_iFrame { get; set; } = DateTime.Now;
 
-        public int statXP = 0;
-        public int statLevel = 1;
-        public Boolean levelUp { get; set; } = false;
+        public int[,] shownWeapon {  get; set; } 
+        public int statXP { get; set; } = 0;
+        public int statLevel { get; set; } = 1;
+		public Boolean levelUp { get; set; } = false;
 
         public List<EntityEnemy>? move(Vector2 direction, int sizeX, int sizeY, List<EntityEnemy> enemies) {
             //fieldsize = sizeX * sizeY / border control
-            if ( x + ( direction.X * speed ) > sizeX )
-                this.x = sizeX;
+            if ( x + ( direction.X * speed ) > sizeX-60 )
+                this.x = sizeX-60;
             else if ( x + ( direction.X * speed ) < 0 )
                 this.x = 0;
             else
                 this.x += ( int ) ( direction.X * speed );
 
 
-            if ( y + ( direction.Y * speed ) > sizeY )
-                this.y = sizeY;
+            if ( y + ( direction.Y * speed ) > sizeY-60 )
+                this.y = sizeY-60;
             else if ( y + ( direction.Y * speed ) < 0 )
                 this.y = 0;
             else
@@ -55,7 +56,7 @@ namespace Swarmbreaker.Cs_Files {
                     }
                 }
 
-                //enemies = this.attack(enemies, closestEnemy!);
+                enemies = this.attack(enemies, closestEnemy!);
 
 
             }
@@ -63,23 +64,31 @@ namespace Swarmbreaker.Cs_Files {
 
 
             //falls projectile keine weiteren hits machen darf wird es aus der liste entfernt
-            //foreach ( Weapon weapon in equippedWeapons ) {
-            //    foreach ( Projectile proj in weapon.Projectiles ) {
-            //        if ( proj.penetration < 0 || proj.distanceTraveled>=proj.range) {
-            //            weapon.Projectiles.Remove(proj);
-            //        }
-            //    }
-            //}
+            foreach ( Weapon weapon in equippedWeapons ) {
+                if ( weapon != null ) {
+                    foreach ( Projectile proj in weapon.Projectiles ) {
+                        if ( proj.penetration < 0 || proj.distanceTraveled >= proj.range ) {
+                            weapon.Projectiles.Remove(proj);
+                        }
+                    }
+
+                }
+            }
 
 
 
             return enemies;
         }
+
+        public void attackAnimation() {
+            for ( int i = 0; i < 6; i++ ) {
+            }
+        }
         public bool death() {
             return ( this.statBaseHP <= 0 );
         }
         public List<EntityEnemy> attack(List<EntityEnemy> enemyList, EntityEnemy closestEnemy) {
-            foreach ( Weapon weapon in equippedWeapons ) { enemyList = weapon.attack(enemyList, closestEnemy, this.x, this.y); }
+            foreach ( Weapon weapon in equippedWeapons ) { if ( weapon != null ) enemyList = weapon.attack(enemyList, closestEnemy, this.x, this.y); }
             return ( enemyList );
         }
         public void xpUp(int xp) {
@@ -104,6 +113,7 @@ namespace Swarmbreaker.Cs_Files {
             this.statBonusArmor = statBonusArmor;
             this.statAttackSpeed = statAttackSpeed;
             this.levelUp = levelUp;
+            this.shownWeapon = new int[6, 2];
         }
 
         public void addWeapon(int weaponType) {
