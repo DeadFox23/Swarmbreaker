@@ -9,9 +9,9 @@
 		{
 			enemies.Add(new EntityEnemy(y, x, speed, statBaseHP, statBaseAttack, statBonusAttack, statBonusArmor, xpDrop, isBoss, id));
 		}
-		public static void addPlayer(int y, int x, float speed, float statBaseHP, Weapon equippedWeapon, float statBonusAttack, float statBonusArmor, float statAttackSpeed)
+		public static void addPlayer(int y, int x, float speed, float statBaseHP, Weapon equippedWeapon, float statBonusAttack, float statBonusArmor, float statAttackSpeed, Boolean levelUp)
 		{
-			players.Add(new EntityPlayerCharacter(y, x, speed, statBaseHP, equippedWeapon, statBonusAttack, statBonusArmor, statAttackSpeed));
+			players.Add(new EntityPlayerCharacter(y, x, speed, statBaseHP, equippedWeapon, statBonusAttack, statBonusArmor, statAttackSpeed, levelUp));
 		}
 
 

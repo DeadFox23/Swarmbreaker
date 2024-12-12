@@ -36,22 +36,25 @@ function randomBool()
 {
     return Math.floor(Math.random() * 2);
 }
+function checkLevelUp(data) {
+    const response = JSON.parse(data.result);
+    const players = response;
+    if (players[0].levelUp === true) {
+        timerRunning = false;
+        showPopUp();
+        players[0].levelUp = flase;
+    }
+}
 
-document.addEventListener("DOMContentLoaded", generatePopUp);
-function generatePopUp() {
-    const openPopupBtn = document.getElementById('openLevelUp'); // Select the open button
-    const popup = document.getElementById('levelUp'); // Select the popup container
-    const popupContent = document.querySelector('.levelUp-content'); // Select the content area
-
-
-    openPopupBtn.addEventListener('click', () => {
-
+    function showPopUp() {
+        const popup = document.getElementById('levelUp'); // Select the popup container
+        const popupContent = document.querySelector('.levelUp-content'); // Select the content area
         popupContent.innerHTML = "<h2>Level up</h2>";
         //Weapons and stats
         var stats = ["Speed", "HP", "Damage", "Armor", "Attackspeed"];
         var weapons = ["Slingshot", "Tree", "Shotgun", "Knife", "Axe"];
 
-        
+
         for (let i = 0; i < 3; i++) {
             //generate button
             const newButton = document.createElement("button");
@@ -85,10 +88,11 @@ function generatePopUp() {
         closePopupBtns.forEach(button => {
             button.addEventListener('click', () => {
                 popup.style.display = 'none';
+                timerRunning = true;
             });
         });
-    });
-}
+    }
+
 
 function btnClick_Click(ButtonID) { action(ButtonID) }
 function action(ButtonID) {
@@ -148,6 +152,7 @@ function enemyPosition() {
         success:
             function (data) {
                 updateEnemyPosition(data);
+                checkEnemyAlive(data);
             }
     })
 }
@@ -167,15 +172,20 @@ function updateEnemyPosition(data) {
 }
 
 window.addEventListener('load', function () {
-    let currentInterval = setInterval(updateTimer, 50);
+    let currentInterval = setInterval(runTimer, 50);
 })
-
-
 function updateTimer() {
     enemyPosition();
 }
+let timerRunning = true;
+function runTimer() {
+    if (timerRunning) {
+        updateTimer();
+    }
+}
 
-window.addEventListener('keydown', function (e) {playerPosition(e.key)});
+window.addEventListener('keydown', function (e) { playerPosition(e.key) });
+
 
 function playerPosition(key) {
     $.ajax({
@@ -189,11 +199,11 @@ function playerPosition(key) {
         success:
             function (data) {
                 updatePlayerPosition(data);
+                checkLevelUp(data);
+                checkPlayerAlive(data);
             }
     })
 }
-
-
 
 function updatePlayerPosition(data) {
     const response = JSON.parse(data.result);
@@ -203,6 +213,30 @@ function updatePlayerPosition(data) {
         if (element) {
             element.style.left = `${players[i].x}px`;
             element.style.top = `${players[i].y}px`;
+        }
+    }
+}
+
+
+function checkPlayerAlive(data) {
+    const response = JSON.parse(data.result);
+    const players = response;
+    for (let i = 0; i <= players.length; i++) {   
+        if (players[i].statBaseHP <= 0) {
+            const element = document.getElementById(`player_${i}`);
+            element.remove();
+            timerRunning = false;
+        }
+    }
+}
+
+function checkEnemyAlive(data) {
+    const response = JSON.parse(data.result);
+    const enemies = response;
+    for (let i = 0; i < enemies.length; i++) {
+        if (enemies[i].statBaseHP <= 0) {
+            const element = document.getElementById(`enemy_${i}`);
+            element.remove();
         }
     }
 }
