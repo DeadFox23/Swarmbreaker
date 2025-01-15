@@ -42,7 +42,7 @@ function checkLevelUp(data) {
     if (players[0].levelUp === true) {
         timerRunning = false;
         showPopUp();
-        players[0].levelUp = flase;
+        players[0].levelUp = false;
     }
 }
 
@@ -221,7 +221,7 @@ function updatePlayerPosition(data) {
 function checkPlayerAlive(data) {
     const response = JSON.parse(data.result);
     const players = response;
-    for (let i = 0; i <= players.length; i++) {   
+    for (let i = 0; i < players.length; i++) {   
         if (players[i].statBaseHP <= 0) {
             const element = document.getElementById(`player_${i}`);
             element.remove();
@@ -233,11 +233,16 @@ function checkPlayerAlive(data) {
 function checkEnemyAlive(data) {
     const response = JSON.parse(data.result);
     const enemies = response;
-    for (let i = 0; i < enemies.length; i++) {
-        if (enemies[i].statBaseHP <= 0) {
+    if (enemies.length > 0) {
+        
+        for (let i = 0; i < enemies.length; i++) {
             const element = document.getElementById(`enemy_${i}`);
-            element.remove();
+            if (enemies[i].statBaseHP <= 0) {
+                
+                element.remove();
+            }
         }
     }
+
 }
 

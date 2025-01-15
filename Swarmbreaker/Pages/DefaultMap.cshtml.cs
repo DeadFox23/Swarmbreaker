@@ -42,15 +42,20 @@ namespace Swarmbreaker.Pages
         }
         public IActionResult OnGetEnemy(string baum)
         {
-            foreach (EntityEnemy enemy in SaveData.enemies)
-			{
-                //enemy.statBaseHP -= 1;
-                if (enemy.death())
+            if(SaveData.enemies.Count > 0)
+            {
+				foreach (EntityEnemy enemy in SaveData.enemies.ToList())
 				{
-					enemies.Remove(enemy);
+					enemy.statBaseHP -= 1;
+					if (enemy.death())
+					{
+						enemies.Remove(enemy);
+						SaveData.enemies.Remove(enemy);
+					}
+					enemy.move(SaveData.players);
 				}
-				enemy.move(SaveData.players);
 			}
+            
 
 			string result = JsonConvert.SerializeObject(SaveData.enemies, Formatting.Indented);
             return new JsonResult(new { result });
@@ -78,11 +83,12 @@ namespace Swarmbreaker.Pages
 			}
 				foreach (EntityPlayerCharacter player in SaveData.players)
 				{
-                //player.xpUp(5);
-                //player.statBaseHP -= 1;
+                player.xpUp(5);
+                player.statBaseHP -= 1;
                 if (player.death())
 				    {
 					    players.Remove(player);
+                        //SaveData.players.Remove(player);
 					    break;
 				    }
 				    player.move(pos, width, height, SaveData.enemies);
